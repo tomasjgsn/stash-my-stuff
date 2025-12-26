@@ -10,8 +10,9 @@ struct StashMyStuffTests {
     }
 
     @Test("Dependency container creates model container")
+    @MainActor
     func dependencyContainerCreation() async throws {
-        let container = DependencyContainer()
-        #expect(container.modelContainer != nil)
+        let container = DependencyContainer.makeModelContainer(inMemory: true)
+        #expect(container.schema.entities.isEmpty) // No models defined yet
     }
 }
