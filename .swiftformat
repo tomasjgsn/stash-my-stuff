@@ -1,0 +1,112 @@
+# SwiftFormat Configuration for Stash My Stuff
+
+# File options
+--exclude .build,DerivedData,Pods
+
+# Format options
+--swiftversion 6.0
+--indent 4
+--tabwidth 4
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--closingparen balanced
+--funcattributes prev-line
+--typeattributes prev-line
+--varattributes prev-line
+--storedvarattrs prev-line
+--computedvarattrs prev-line
+
+# Spacing
+--trimwhitespace always
+--linebreaks lf
+
+# Braces
+--allman false
+
+# Imports
+--importgrouping testable-last
+
+# Self
+--self insert
+
+# Void
+--voidtype void
+
+# Semicolons
+--semicolons never
+
+# Trailing commas
+--commas inline
+
+# Redundant
+--redundanttype inferred
+
+# Enabled rules
+--enable blankLinesBetweenImports
+--enable blankLinesAroundMark
+--enable blankLinesAtStartOfScope
+--enable blankLinesAtEndOfScope
+--enable consecutiveSpaces
+--enable duplicateImports
+--enable elseOnSameLine
+--enable emptyBraces
+--enable hoistPatternLet
+--enable indent
+--enable leadingDelimiters
+--enable linebreakAtEndOfFile
+--enable modifierOrder
+--enable numberFormatting
+--enable redundantBreak
+--enable redundantClosure
+--enable redundantGet
+--enable redundantInit
+--enable redundantLet
+--enable redundantLetError
+--enable redundantNilInit
+--enable redundantObjc
+--enable redundantParens
+--enable redundantPattern
+--enable redundantRawValues
+--enable redundantReturn
+--enable redundantSelf
+--enable redundantType
+--enable redundantVoidReturnType
+--enable semicolons
+--enable sortImports
+--enable spaceAroundBraces
+--enable spaceAroundBrackets
+--enable spaceAroundComments
+--enable spaceAroundGenerics
+--enable spaceAroundOperators
+--enable spaceAroundParens
+--enable spaceInsideBraces
+--enable spaceInsideBrackets
+--enable spaceInsideComments
+--enable spaceInsideGenerics
+--enable spaceInsideParens
+--enable strongOutlets
+--enable strongifiedSelf
+--enable todos
+--enable trailingClosures
+--enable trailingCommas
+--enable trailingSpace
+--enable typeSugar
+--enable void
+--enable wrapArguments
+--enable wrapAttributes
+--enable wrapMultilineStatementBraces
+--enable yodaConditions
+
+# Disabled rules
+--disable acronyms
+--disable blockComments
+--disable docComments
+--disable fileHeader
+--disable markTypes
+--disable organizeDeclarations
+--disable sortDeclarations
+--disable wrapConditionalBodies
+--disable wrapEnumCases
+--disable wrapSwitchCases
