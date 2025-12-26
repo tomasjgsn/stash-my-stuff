@@ -1,0 +1,974 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001001D0001 /* StashMyStuffApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001001F0001 /* StashMyStuffApp.swift */; };
+		A1000001001D0002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000001001F0002 /* ContentView.swift */; };
+		A1000001001D0003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000001001F0003 /* Assets.xcassets */; };
+		A1000002001D0001 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002001F0001 /* ShareViewController.swift */; };
+		A1000002001D0002 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002001F0002 /* ShareView.swift */; };
+		A1000003001D0001 /* StashWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003001F0001 /* StashWidgets.swift */; };
+		A1000003001D0002 /* BandcampFridayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000003001F0002 /* BandcampFridayWidget.swift */; };
+		A1000003001D0003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000003001F0003 /* Assets.xcassets */; };
+		D925CEF92EFF220D0061B06E /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEF82EFF220D0061B06E /* DependencyContainer.swift */; };
+		D925CEFD2EFF22630061B06E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFA2EFF22630061B06E /* AppCoordinator.swift */; };
+		D925CEFE2EFF22630061B06E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFB2EFF22630061B06E /* Coordinator.swift */; };
+		D925CF012EFF226B0061B06E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFF2EFF226B0061B06E /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1000005001C0003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1000000001P0001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1000001001N0001;
+			remoteInfo = StashMyStuff;
+		};
+		A1000005001C0004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1000000001P0001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1000001001N0001;
+			remoteInfo = StashMyStuff;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A1000001001F0001 /* StashMyStuffApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashMyStuffApp.swift; sourceTree = "<group>"; };
+		A1000001001F0002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1000001001F0003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000001001F0004 /* StashMyStuff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StashMyStuff.entitlements; sourceTree = "<group>"; };
+		A1000001001F0005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000001001P0001 /* StashMyStuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StashMyStuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000002001F0001 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		A1000002001F0002 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		A1000002001F0003 /* StashShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StashShareExtension.entitlements; sourceTree = "<group>"; };
+		A1000002001F0004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000002001P0001 /* StashShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StashShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000003001F0001 /* StashWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashWidgets.swift; sourceTree = "<group>"; };
+		A1000003001F0002 /* BandcampFridayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandcampFridayWidget.swift; sourceTree = "<group>"; };
+		A1000003001F0003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1000003001F0004 /* StashWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StashWidgets.entitlements; sourceTree = "<group>"; };
+		A1000003001F0005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1000003001P0001 /* StashWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StashWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000004001F0001 /* StashMyStuffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashMyStuffTests.swift; sourceTree = "<group>"; };
+		A1000004001F0002 /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
+		A1000004001F0003 /* MockFactories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactories.swift; sourceTree = "<group>"; };
+		A1000004001P0001 /* StashMyStuffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StashMyStuffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000005001F0001 /* StashMyStuffUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashMyStuffUITests.swift; sourceTree = "<group>"; };
+		A1000005001F0002 /* StashMyStuffUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashMyStuffUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A1000005001P0001 /* StashMyStuffUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StashMyStuffUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D925CEF82EFF220D0061B06E /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		D925CEFA2EFF22630061B06E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		D925CEFB2EFF22630061B06E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		D925CEFF2EFF226B0061B06E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1000001001A0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000002001A0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000003001A0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000004001A0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000005001A0001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1000000001G0001 = {
+			isa = PBXGroup;
+			children = (
+				A1000001001G0001 /* StashMyStuff */,
+				A1000002001G0001 /* StashShareExtension */,
+				A1000003001G0001 /* StashWidgets */,
+				A1000004001G0001 /* StashMyStuffTests */,
+				A1000005001G0001 /* StashMyStuffUITests */,
+				A1000000001G0002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1000000001G0002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001001P0001 /* StashMyStuff.app */,
+				A1000002001P0001 /* StashShareExtension.appex */,
+				A1000003001P0001 /* StashWidgetsExtension.appex */,
+				A1000004001P0001 /* StashMyStuffTests.xctest */,
+				A1000005001P0001 /* StashMyStuffUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1000001001G0001 /* StashMyStuff */ = {
+			isa = PBXGroup;
+			children = (
+				A1000001001G0002 /* App */,
+				A1000001001G0003 /* Models */,
+				A1000001001G0004 /* Views */,
+				A1000001001G0005 /* ViewModels */,
+				A1000001001G0006 /* Services */,
+				A1000001001G0007 /* DesignSystem */,
+				A1000001001F0003 /* Assets.xcassets */,
+				A1000001001F0004 /* StashMyStuff.entitlements */,
+				A1000001001F0005 /* Info.plist */,
+				D925CEFC2EFF22630061B06E /* Coordinators */,
+				D925CF002EFF226B0061B06E /* Utilities */,
+			);
+			path = StashMyStuff;
+			sourceTree = "<group>";
+		};
+		A1000001001G0002 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D925CEF82EFF220D0061B06E /* DependencyContainer.swift */,
+				A1000001001F0001 /* StashMyStuffApp.swift */,
+				A1000001001F0002 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A1000001001G0003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A1000001001G0004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1000001001G0005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A1000001001G0006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A1000001001G0007 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		A1000002001G0001 /* StashShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				A1000002001F0001 /* ShareViewController.swift */,
+				A1000002001F0002 /* ShareView.swift */,
+				A1000002001F0003 /* StashShareExtension.entitlements */,
+				A1000002001F0004 /* Info.plist */,
+			);
+			path = StashShareExtension;
+			sourceTree = "<group>";
+		};
+		A1000003001G0001 /* StashWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				A1000003001F0001 /* StashWidgets.swift */,
+				A1000003001F0002 /* BandcampFridayWidget.swift */,
+				A1000003001F0003 /* Assets.xcassets */,
+				A1000003001F0004 /* StashWidgets.entitlements */,
+				A1000003001F0005 /* Info.plist */,
+			);
+			path = StashWidgets;
+			sourceTree = "<group>";
+		};
+		A1000004001G0001 /* StashMyStuffTests */ = {
+			isa = PBXGroup;
+			children = (
+				A1000004001F0001 /* StashMyStuffTests.swift */,
+				A1000004001G0002 /* Utilities */,
+			);
+			path = StashMyStuffTests;
+			sourceTree = "<group>";
+		};
+		A1000004001G0002 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A1000004001F0002 /* TestUtilities.swift */,
+				A1000004001F0003 /* MockFactories.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A1000005001G0001 /* StashMyStuffUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A1000005001F0001 /* StashMyStuffUITests.swift */,
+				A1000005001F0002 /* StashMyStuffUITestsLaunchTests.swift */,
+			);
+			path = StashMyStuffUITests;
+			sourceTree = "<group>";
+		};
+		D925CEFC2EFF22630061B06E /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				D925CEFA2EFF22630061B06E /* AppCoordinator.swift */,
+				D925CEFB2EFF22630061B06E /* Coordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		D925CF002EFF226B0061B06E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D925CEFF2EFF226B0061B06E /* Extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1000001001N0001 /* StashMyStuff */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000001001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuff" */;
+			buildPhases = (
+				A1000001001S0001 /* Sources */,
+				A1000001001A0001 /* Frameworks */,
+				A1000001001R0001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StashMyStuff;
+			productName = StashMyStuff;
+			productReference = A1000001001P0001 /* StashMyStuff.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1000002001N0001 /* StashShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000002001X0001 /* Build configuration list for PBXNativeTarget "StashShareExtension" */;
+			buildPhases = (
+				A1000002001S0001 /* Sources */,
+				A1000002001A0001 /* Frameworks */,
+				A1000002001R0001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StashShareExtension;
+			productName = StashShareExtension;
+			productReference = A1000002001P0001 /* StashShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A1000003001N0001 /* StashWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000003001X0001 /* Build configuration list for PBXNativeTarget "StashWidgetsExtension" */;
+			buildPhases = (
+				A1000003001S0001 /* Sources */,
+				A1000003001A0001 /* Frameworks */,
+				A1000003001R0001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StashWidgetsExtension;
+			productName = StashWidgetsExtension;
+			productReference = A1000003001P0001 /* StashWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A1000004001N0001 /* StashMyStuffTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000004001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuffTests" */;
+			buildPhases = (
+				A1000004001S0001 /* Sources */,
+				A1000004001A0001 /* Frameworks */,
+				A1000004001R0001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1000004001E0001 /* PBXTargetDependency */,
+			);
+			name = StashMyStuffTests;
+			productName = StashMyStuffTests;
+			productReference = A1000004001P0001 /* StashMyStuffTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A1000005001N0001 /* StashMyStuffUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000005001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuffUITests" */;
+			buildPhases = (
+				A1000005001S0001 /* Sources */,
+				A1000005001A0001 /* Frameworks */,
+				A1000005001R0001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1000005001E0001 /* PBXTargetDependency */,
+			);
+			name = StashMyStuffUITests;
+			productName = StashMyStuffUITests;
+			productReference = A1000005001P0001 /* StashMyStuffUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1000000001P0001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					A1000001001N0001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					A1000002001N0001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					A1000003001N0001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					A1000004001N0001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1000001001N0001;
+					};
+					A1000005001N0001 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1000001001N0001;
+					};
+				};
+			};
+			buildConfigurationList = A1000000001X0001 /* Build configuration list for PBXProject "StashMyStuff" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1000000001G0001;
+			productRefGroup = A1000000001G0002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1000001001N0001 /* StashMyStuff */,
+				A1000002001N0001 /* StashShareExtension */,
+				A1000003001N0001 /* StashWidgetsExtension */,
+				A1000004001N0001 /* StashMyStuffTests */,
+				A1000005001N0001 /* StashMyStuffUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1000001001R0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001001D0003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000002001R0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000003001R0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000003001D0003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000004001R0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000005001R0001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1000001001S0001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D925CEFD2EFF22630061B06E /* AppCoordinator.swift in Sources */,
+				D925CF012EFF226B0061B06E /* Extensions.swift in Sources */,
+				D925CEFE2EFF22630061B06E /* Coordinator.swift in Sources */,
+				A1000001001D0001 /* StashMyStuffApp.swift in Sources */,
+				D925CEF92EFF220D0061B06E /* DependencyContainer.swift in Sources */,
+				A1000001001D0002 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000002001S0001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000002001D0001 /* ShareViewController.swift in Sources */,
+				A1000002001D0002 /* ShareView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000003001S0001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000003001D0001 /* StashWidgets.swift in Sources */,
+				A1000003001D0002 /* BandcampFridayWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000004001S0001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000005001S0001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1000004001E0001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1000001001N0001 /* StashMyStuff */;
+			targetProxy = A1000005001C0003 /* PBXContainerItemProxy */;
+		};
+		A1000005001E0001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1000001001N0001 /* StashMyStuff */;
+			targetProxy = A1000005001C0004 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A1000000001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1000000001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		A1000001001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StashMyStuff/StashMyStuff.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RK356DQ922;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashMyStuff/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash My Stuff";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1000001001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StashMyStuff/StashMyStuff.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RK356DQ922;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashMyStuff/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash My Stuff";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A1000002001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = StashShareExtension/StashShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash My Stuff";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1000002001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = StashShareExtension/StashShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash My Stuff";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A1000003001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StashWidgets/StashWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1000003001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StashWidgets/StashWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StashWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Stash Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A1000004001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StashMyStuff.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StashMyStuff";
+			};
+			name = Debug;
+		};
+		A1000004001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StashMyStuff.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StashMyStuff";
+			};
+			name = Release;
+		};
+		A1000005001B0001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StashMyStuff;
+			};
+			name = Debug;
+		};
+		A1000005001B0002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stashmystuff.app.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StashMyStuff;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1000000001X0001 /* Build configuration list for PBXProject "StashMyStuff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000000001B0001 /* Debug */,
+				A1000000001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000001001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000001001B0001 /* Debug */,
+				A1000001001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000002001X0001 /* Build configuration list for PBXNativeTarget "StashShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000002001B0001 /* Debug */,
+				A1000002001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000003001X0001 /* Build configuration list for PBXNativeTarget "StashWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000003001B0001 /* Debug */,
+				A1000003001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000004001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuffTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000004001B0001 /* Debug */,
+				A1000004001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000005001X0001 /* Build configuration list for PBXNativeTarget "StashMyStuffUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000005001B0001 /* Debug */,
+				A1000005001B0002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1000000001P0001 /* Project object */;
+}
