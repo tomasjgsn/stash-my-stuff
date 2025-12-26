@@ -1,5 +1,5 @@
-import SwiftUI
 import Observation
+import SwiftUI
 
 @Observable
 final class AppCoordinator {
@@ -20,15 +20,15 @@ final class AppCoordinator {
     }
 
     func navigate(to destination: Destination) {
-        navigationPath.append(destination)
+        self.navigationPath.append(destination)
     }
 
     func pop() {
-        guard !navigationPath.isEmpty else { return }
-        navigationPath.removeLast()
+        guard !self.navigationPath.isEmpty else { return }
+        self.navigationPath.removeLast()
     }
 
     func popToRoot() {
-        navigationPath = NavigationPath()
+        self.navigationPath = NavigationPath()
     }
 }

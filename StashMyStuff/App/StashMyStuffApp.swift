@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct StashMyStuffApp: App {
@@ -9,18 +9,18 @@ struct StashMyStuffApp: App {
         }
 
         #if os(macOS)
-        Settings {
-            SettingsView()
-        }
+            Settings {
+                SettingsView()
+            }
         #endif
     }
 }
 
 #if os(macOS)
-struct SettingsView: View {
-    var body: some View {
-        Text("Settings")
-            .frame(width: 400, height: 300)
+    struct SettingsView: View {
+        var body: some View {
+            Text("Settings")
+                .frame(width: 400, height: 300)
+        }
     }
-}
 #endif

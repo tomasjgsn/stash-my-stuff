@@ -1,12 +1,12 @@
 import XCTest
 
 final class StashMyStuffUITests: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
 
     override func tearDownWithError() throws {
+        // Teardown code
     }
 
     @MainActor

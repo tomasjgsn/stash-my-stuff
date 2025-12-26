@@ -129,6 +129,9 @@ force_cast: error
 force_try: error
 force_unwrapping: error
 
+number_separator:
+  minimum_length: 5
+
 custom_rules:
   no_print_statements:
     name: "No Print Statements"

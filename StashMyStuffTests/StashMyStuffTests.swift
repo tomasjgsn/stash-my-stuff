@@ -3,7 +3,6 @@ import Testing
 
 @Suite("StashMyStuff Tests")
 struct StashMyStuffTests {
-
     @Test("App initializes correctly")
     func appInitialization() async throws {
         // Placeholder test to verify test infrastructure works

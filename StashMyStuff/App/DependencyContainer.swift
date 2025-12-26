@@ -1,6 +1,6 @@
-import SwiftUI
-import SwiftData
 import Observation
+import SwiftData
+import SwiftUI
 
 @Observable
 final class DependencyContainer {
@@ -19,7 +19,7 @@ final class DependencyContainer {
                 isStoredInMemoryOnly: false
             )
 
-            modelContainer = try ModelContainer(
+            self.modelContainer = try ModelContainer(
                 for: schema,
                 configurations: [modelConfiguration]
             )
@@ -29,15 +29,17 @@ final class DependencyContainer {
     }
 
     // MARK: - Services
+
     // Services will be added here as the app develops
 }
 
 extension EnvironmentValues {
-    @Entry var dependencyContainer: DependencyContainer = DependencyContainer()
+    @Entry
+    var dependencyContainer = DependencyContainer()
 }
 
 extension View {
     func environment(_ container: DependencyContainer) -> some View {
-        environment(\.dependencyContainer, container)
+        self.environment(\.dependencyContainer, container)
     }
 }

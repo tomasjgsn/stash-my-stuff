@@ -20,7 +20,7 @@ struct ContentView: View {
             }
             .navigationTitle("Home")
             #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             #endif
         }
     }

@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct ShareView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss)
+    private var dismiss
 
     var body: some View {
         NavigationStack {
@@ -23,20 +24,20 @@ struct ShareView: View {
             .padding()
             .navigationTitle("Stash My Stuff")
             #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            self.dismiss()
+                        }
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Save") {
+                            // Save action to be implemented
+                            self.dismiss()
+                        }
                     }
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        // Save action to be implemented
-                        dismiss()
-                    }
-                }
-            }
             #endif
         }
     }

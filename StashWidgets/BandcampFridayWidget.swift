@@ -1,12 +1,12 @@
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct BandcampFridayProvider: TimelineProvider {
-    func placeholder(in context: Context) -> BandcampFridayEntry {
+    func placeholder(in _: Context) -> BandcampFridayEntry {
         BandcampFridayEntry(date: Date(), queueCount: 0, nextBandcampFriday: nil)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (BandcampFridayEntry) -> Void) {
+    func getSnapshot(in _: Context, completion: @escaping (BandcampFridayEntry) -> Void) {
         let entry = BandcampFridayEntry(
             date: Date(),
             queueCount: 4,
@@ -15,7 +15,7 @@ struct BandcampFridayProvider: TimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<BandcampFridayEntry>) -> Void) {
+    func getTimeline(in _: Context, completion: @escaping (Timeline<BandcampFridayEntry>) -> Void) {
         let entry = BandcampFridayEntry(
             date: Date(),
             queueCount: 0, // Will be fetched from shared data in Phase 6
@@ -60,7 +60,8 @@ struct BandcampFridayEntry: TimelineEntry {
 
 struct BandcampFridayWidgetEntryView: View {
     var entry: BandcampFridayProvider.Entry
-    @Environment(\.widgetFamily) var family
+    @Environment(\.widgetFamily)
+    var family
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -77,8 +78,8 @@ struct BandcampFridayWidgetEntryView: View {
                     .font(.subheadline)
                     .fontWeight(.medium)
 
-                if entry.queueCount > 0 {
-                    Text("\(entry.queueCount) items in queue")
+                if self.entry.queueCount > 0 {
+                    Text("\(self.entry.queueCount) items in queue")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
@@ -96,10 +97,10 @@ struct BandcampFridayWidgetEntryView: View {
 }
 
 struct BandcampFridayWidget: Widget {
-    let kind: String = "BandcampFridayWidget"
+    let kind = "BandcampFridayWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: BandcampFridayProvider()) { entry in
+        StaticConfiguration(kind: self.kind, provider: BandcampFridayProvider()) { entry in
             BandcampFridayWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Bandcamp Friday")
