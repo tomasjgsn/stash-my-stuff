@@ -4,6 +4,22 @@
 
 ---
 
+## Current Status
+
+| Phase | Progress | Status |
+|-------|----------|--------|
+| Phase 0: Foundation | 100% | ✅ Complete |
+| Phase 1: Data Layer | 100% | ✅ Complete |
+| Phase 2: Design System | 0% | 📍 **Up Next** |
+| Phase 3: Core Screens | 0% | Pending |
+| Phase 4: Share Extension | 0% | Pending |
+| Phase 5: CloudKit Sync ⚠️ | 0% | Pending |
+| Phase 6: Polish & Launch | 0% | Pending |
+
+**Last Updated:** December 27, 2025
+
+---
+
 ## Overview
 
 This plan breaks down the Stash My Stuff project into **7 phases** with clear milestones, deliverables, and success criteria. Each phase builds on the previous, ensuring you always have a working app while progressively adding features.
@@ -64,17 +80,18 @@ A clean, buildable Xcode project with all targets configured, running on Simulat
 
 ---
 
-## Phase 1: Data Layer & Core Models
+## Phase 1: Data Layer & Core Models ✅
+**Status:** COMPLETE (December 2025)
 **Goal:** Build the complete data foundation with SwiftData and local persistence.
 
 ### Milestones
 
 #### 1.1 — SwiftData Models
-- [ ] Implement `StashItem` model with all properties from spec
-- [ ] Implement `Tag` model with bidirectional relationship
-- [ ] Implement `Category` enum with CaseIterable
-- [ ] Create `CategoryConfig` and `FlagDefinition` structures
-- [ ] Add computed properties for lifecycle state detection
+- [x] Implement `StashItem` model with all properties from spec
+- [x] Implement `Tag` model with bidirectional relationship
+- [x] Implement `Category` enum with CaseIterable
+- [x] Create `CategoryConfig` and `FlagDefinition` structures
+- [x] Add computed properties for lifecycle state detection
 
 ```swift
 // Key model features to implement:
@@ -86,37 +103,37 @@ extension StashItem {
 ```
 
 #### 1.2 — Category Configuration System
-- [ ] Define all 7 category configurations with flags
-- [ ] Implement flag validation per category
-- [ ] Create category-specific computed properties
-- [ ] Build flag toggle logic with proper state management
+- [x] Define all 10 category configurations with flags
+- [x] Implement flag validation per category
+- [x] Create category-specific computed properties
+- [x] Build flag toggle logic with proper state management
 
 #### 1.3 — Data Layer Services
-- [ ] Create `StashRepository` protocol and implementation
-- [ ] Implement CRUD operations with SwiftData
-- [ ] Add query methods for Smart Views:
+- [x] Create `StashRepository` protocol and implementation
+- [x] Implement CRUD operations with SwiftData
+- [x] Add query methods for Smart Views:
   - `fetchUncooked()` — recipes not yet cooked
   - `fetchToRead()` — books owned but unread
   - `fetchBandcampQueue()` — music to purchase
   - `fetchByCategory(_:)` — filtered by category
   - `fetchFavorites()` — all favorites across categories
-- [ ] Implement sorting: by date added, by completion status
-- [ ] Add full-text search across title, notes, tags
+- [x] Implement sorting: by date added, by completion status
+- [x] Add full-text search across title, notes, tags
 
 #### 1.4 — Data Validation & Migration
-- [ ] Add model validation (required fields, URL format)
-- [ ] Create schema versioning strategy for future migrations
-- [ ] Implement data integrity checks
+- [x] Add model validation (required fields, URL format)
+- [x] Create schema versioning strategy for future migrations
+- [x] Implement data integrity checks
 
 ### Deliverable
 Complete data layer with unit tests, capable of CRUD operations and all Smart View queries.
 
 ### Success Criteria
-- [ ] All model unit tests pass (minimum 20 tests)
-- [ ] Can create, read, update, delete items
-- [ ] Smart View queries return correct results
-- [ ] Search works across all searchable fields
-- [ ] 80%+ code coverage on data layer
+- [x] All model unit tests pass (25 tests across 5 test suites)
+- [x] Can create, read, update, delete items
+- [x] Smart View queries return correct results
+- [x] Search works across all searchable fields
+- [x] 80%+ code coverage on data layer
 
 ---
 

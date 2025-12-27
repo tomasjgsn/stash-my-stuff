@@ -13,8 +13,8 @@ A curated wishlist & lifecycle tracker for the things you want to cook, read, wa
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 0 | ✅ Complete | Foundation & Project Setup |
-| Phase 1 | 🔲 Pending | Data Layer & Core Models |
-| Phase 2 | 🔲 Pending | Design System & UI Components |
+| Phase 1 | ✅ Complete | Data Layer & Core Models (25 tests passing) |
+| Phase 2 | 📍 Next | Design System & UI Components |
 | Phase 3 | 🔲 Pending | Core App Screens |
 | Phase 4 | 🔲 Pending | Share Extension & Metadata |
 | Phase 5 | 🔲 Pending | CloudKit Sync & Paid Features ⚠️ |
@@ -23,6 +23,12 @@ A curated wishlist & lifecycle tracker for the things you want to cook, read, wa
 > ⚠️ **Phase 5 requires a paid Apple Developer account** ($99/year) for iCloud sync, push notifications, and App Store distribution. All other phases work with a free Apple ID.
 
 See [DEVELOPMENT_PLAN.md](./DEVELOPMENT_PLAN.md) for detailed roadmap.
+
+### Phase 1 Highlights
+- **Models**: StashItem, Tag, Category enum with 10 categories
+- **Repository**: Full CRUD + Smart Views (uncookedRecipes, toRead, bandcampQueue, etc.)
+- **Testing**: 25 unit tests across 5 test suites, all passing
+- **Technical**: In-memory filtering for SwiftData enum predicates
 
 ---
 
