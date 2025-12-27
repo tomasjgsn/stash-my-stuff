@@ -13,6 +13,177 @@
 
 ---
 
+## Tutorial Game System
+
+This project uses an adaptive learning approach. Every development phase is structured as a tutorial that builds deep, repeatable understanding of Swift and iOS development.
+
+### Your Learning Profile
+
+| Aspect | Setting |
+|--------|---------|
+| New concepts | Show example first, then you try |
+| Familiar patterns | You attempt first, then review |
+| Lesson size | Scales with complexity |
+| Code ownership | You type; scaffolding decreases over time |
+| Challenges | Boss battles at end of each phase |
+
+### Novelty Detection
+
+Claude determines if a concept is **NEW** or **FAMILIAR** based on:
+
+**NEW** (use "Show then Try"):
+- First encounter with Swift-specific syntax (optionals, closures, property wrappers)
+- Apple framework concepts (SwiftUI views, SwiftData models, CloudKit)
+- iOS-specific patterns (App lifecycle, extensions, entitlements)
+
+**FAMILIAR** (use "Try then Review"):
+- Control flow (loops, conditionals) - similar to MATLAB/Python
+- Functions and parameters - similar to MATLAB/Python
+- Data structures (arrays, dictionaries) - similar to MATLAB/Python
+- Object-oriented concepts (classes, inheritance) - similar to Python
+- Basic algorithms - universal
+
+### Lesson Types
+
+#### Micro-lesson (5-10 min)
+- **When**: Single isolated concept
+- **Format**:
+  1. One-paragraph explanation
+  2. MATLAB/Python comparison (if applicable)
+  3. Swift code example (10-20 lines)
+  4. You write similar code
+  5. Immediate feedback
+
+#### Standard Lesson (15-30 min)
+- **When**: Small feature requiring 2-4 concepts
+- **Format**:
+  1. Feature goal explanation
+  2. Concept breakdown (mini-lessons for each)
+  3. Guided implementation with checkpoints
+  4. You complete the feature
+  5. Code review and refinement
+
+#### Deep Dive (30-60 min)
+- **When**: Substantial feature, architectural decisions, or complex integrations
+- **Format**:
+  1. Architecture overview
+  2. Design decisions discussion
+  3. Step-by-step implementation with explanations
+  4. You implement core logic (Claude provides scaffolding)
+  5. Testing and validation
+  6. Refactoring discussion
+
+### Progress Tracking
+
+Progress is tracked in `PROGRESS.md`. Each phase displays progress visually:
+
+```
+╔══════════════════════════════════════════════════════════╗
+║  PHASE 1: Data Layer                                     ║
+║  ████████░░░░░░░░░░░░ 40%                               ║
+║                                                          ║
+║  Completed:                                              ║
+║  ✓ Swift structs and classes                            ║
+║  ✓ SwiftData @Model basics                              ║
+║  → Working on: Relationships between models              ║
+║                                                          ║
+║  Boss Battle: LOCKED (complete 80% to unlock)            ║
+╚══════════════════════════════════════════════════════════╝
+```
+
+### Boss Battles
+
+At the end of each phase, a challenge tests your understanding:
+
+**Unlock requirement**: Complete 80% of phase lessons
+
+**Format**:
+1. Claude describes a feature to implement
+2. You write the code WITHOUT Claude's help
+3. You can ask clarifying questions about REQUIREMENTS (not implementation)
+4. Once submitted, Claude reviews and provides detailed feedback
+5. Iterate until passing
+
+### Concept Building Blocks
+
+Concepts build on each other. This map shows dependencies:
+
+```
+FOUNDATION (Phase 0-1)
+├── Swift Basics
+│   ├── Variables (let/var) ←── MATLAB variables
+│   ├── Optionals (?) ←── NEW CONCEPT
+│   ├── Structs vs Classes ←── Python classes
+│   └── Protocols ←── Python ABC
+│
+├── SwiftUI Fundamentals
+│   ├── View protocol ←── NEW CONCEPT
+│   ├── @State ←── NEW CONCEPT
+│   ├── @Binding ←── NEW CONCEPT
+│   └── View modifiers ←── Method chaining
+│
+└── SwiftData
+    ├── @Model ←── NEW CONCEPT
+    ├── Relationships ←── Database concepts
+    └── Queries ←── SQL/pandas filtering
+
+INTERMEDIATE (Phase 2-4)
+├── Design Patterns
+│   ├── MVVM ←── Builds on SwiftUI
+│   └── Coordinator ←── NEW CONCEPT
+│
+├── Components
+│   └── Reusable Views ←── Builds on SwiftUI
+│
+└── Extensions
+    └── Share/Widget ←── NEW CONCEPT
+
+ADVANCED (Phase 5-6)
+├── CloudKit ←── NEW CONCEPT
+├── Concurrency ←── async/await similar to Python
+└── Performance ←── Profiling concepts universal
+```
+
+### Teaching Instructions for Claude
+
+When teaching a concept:
+
+1. **Check novelty**: Is this NEW or FAMILIAR? Also check `PROGRESS.md` concept mastery.
+
+2. **If NEW**:
+   - Start with "Here's how Swift handles [concept]..."
+   - Show 1-2 code examples
+   - Explain the "why" (Swift design philosophy)
+   - Compare to closest MATLAB/Python equivalent (or explain why there isn't one)
+   - Ask user to write similar code
+   - Review and correct
+
+3. **If FAMILIAR**:
+   - Start with "This is similar to [MATLAB/Python concept]. Try implementing..."
+   - Let user attempt first
+   - Review their code
+   - Point out Swift-specific nuances they might have missed
+   - Show idiomatic Swift version if needed
+
+4. **Always**:
+   - Explain WHY, not just HOW
+   - Use real examples from the Stash My Stuff codebase
+   - Update `PROGRESS.md` after each lesson (checkboxes, session log)
+   - Celebrate milestones and award achievements when earned
+
+### Progress File Management
+
+Claude should manage `PROGRESS.md` as follows:
+- Check this file at the start of each session to understand current progress
+- Update lesson checkboxes when completed
+- Update concept mastery checkboxes when demonstrated
+- Log sessions with date, lessons completed, and notes
+- Unlock boss battles when 80% of phase lessons are complete
+- Move achievements from "Available" to "Unlocked" when earned
+- Update the "Last updated" timestamp
+
+---
+
 ## Xcode Concepts for Python/MATLAB Developers
 
 ### Project Structure (vs Python)
@@ -24,6 +195,24 @@
 | `__init__.py` modules | Swift modules are implicit per target |
 | `if __name__ == "__main__"` | `@main` attribute on App struct |
 | `pip install` | Add package in Xcode or edit `Package.swift` |
+
+### MATLAB/Python to Swift Quick Reference
+
+| Concept | MATLAB | Python | Swift |
+|---------|--------|--------|-------|
+| Variable | `x = 5` | `x = 5` | `let x = 5` (constant) or `var x = 5` (mutable) |
+| Array | `[1,2,3]` | `[1,2,3]` | `[1,2,3]` (same!) |
+| Dictionary | `containers.Map` | `{"a": 1}` | `["a": 1]` |
+| Function | `function y = f(x)` | `def f(x):` | `func f(x: Int) -> Int` |
+| For loop | `for i = 1:10` | `for i in range(10):` | `for i in 0..<10` |
+| If statement | `if x > 0` | `if x > 0:` | `if x > 0 { }` |
+| Print | `disp(x)` | `print(x)` | `print(x)` (same!) |
+| Null/None | `[]` or `NaN` | `None` | `nil` (with optionals) |
+| Class | `classdef` | `class Foo:` | `class Foo { }` or `struct Foo { }` |
+| String format | `sprintf` | `f"{x}"` | `"\(x)"` (string interpolation) |
+| Lambda | `@(x) x^2` | `lambda x: x**2` | `{ x in x * x }` |
+| Try/Catch | `try/catch` | `try/except` | `do { try } catch { }` |
+| Import | `import pkg` | `import pkg` | `import Framework` |
 
 ### Key Xcode Terminology
 
@@ -121,6 +310,9 @@
 
 ---
 
-## Current Phase: 0 (Foundation) - COMPLETED
+## Current Phase: 1 (Data Layer) - READY TO START
 
-See DEVELOPMENT_PLAN.md for full roadmap.
+**Next Step**: Begin Lesson 1.1 (Swift Structs vs Classes)
+
+See `PROGRESS.md` for detailed lesson tracking and concept mastery.
+See `DEVELOPMENT_PLAN.md` for full roadmap.

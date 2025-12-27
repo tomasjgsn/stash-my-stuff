@@ -10,7 +10,8 @@ enum DependencyContainer {
     @MainActor
     static func makeModelContainer(inMemory: Bool = false) -> ModelContainer {
         let schema = Schema([
-            // Models will be added here in Phase 1
+            StashItem.self,
+            Tag.self
         ])
 
         // Note: CloudKit sync disabled - requires paid Apple Developer account

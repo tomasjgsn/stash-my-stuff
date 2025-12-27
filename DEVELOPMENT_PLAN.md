@@ -193,7 +193,7 @@ A component library with SwiftUI Previews demonstrating all components in isolat
   - macOS: Sidebar + detail pattern
 
 #### 3.2 — Home Screen
-- [ ] Category grid (7 categories with counts)
+- [ ] Category grid (10 categories with counts)
 - [ ] Smart Views section with dynamic counts
 - [ ] Search bar with instant filtering
 - [ ] Pull-to-refresh for sync status
@@ -264,10 +264,14 @@ Fully navigable app with all core screens. Data persists locally.
 - [ ] Domain mappings:
   - `nytcooking.com`, `allrecipes.com` → Recipes
   - `goodreads.com`, `amazon.com/dp/` (books) → Books
-  - `imdb.com`, `letterboxd.com` → Movies
-  - `bandcamp.com`, `spotify.com` → Music
-  - `*.myshopify.com`, fashion domains → Clothes
-- [ ] Instagram/YouTube: Use ML or title heuristics
+  - `imdb.com`, `letterboxd.com`, `justwatch.com` → Movies & TV
+  - `bandcamp.com`, `spotify.com`, `soundcloud.com` → Music
+  - `*.myshopify.com`, fashion domains, brand sites → Clothes
+  - `wayfair.com`, `ikea.com`, design blogs → Home
+  - `medium.com`, `substack.com`, news domains → Articles
+  - `apple.com/podcasts`, `spotify.com/show` → Podcasts
+  - `airbnb.com`, `tripadvisor.com`, travel blogs → Trips
+  - All others → Backpack (catch-all)
 - [ ] Confidence scoring for auto-detection
 - [ ] User can always override
 
@@ -282,9 +286,9 @@ Working share extension that saves links with metadata to the main app.
 
 ### Success Criteria
 - [ ] Share from Safari adds item to app
-- [ ] Share from Instagram adds item to app
+- [ ] Share from any app (Safari, Mail, Notes, etc.) adds item
 - [ ] Metadata (title, image) extracts in < 3 seconds
-- [ ] Category auto-detects correctly for known domains
+- [ ] Category auto-detects correctly for known domains (80%+ accuracy)
 - [ ] < 2 taps to save (category auto-selected)
 
 ---
