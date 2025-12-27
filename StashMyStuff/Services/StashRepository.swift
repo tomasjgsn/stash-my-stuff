@@ -54,58 +54,58 @@ class StashRepository: StashRepositoryProtocol {
         let descriptor = FetchDescriptor<StashItem>(
             sortBy: [SortDescriptor(\.dateAdded, order: .reverse)]
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+        return (try? self.modelContext.fetch(descriptor)) ?? []
     }
 
     func fetchByCategory(_ category: Category) -> [StashItem] {
         // Use in-memory filtering for enum comparison (SwiftData predicate limitation)
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
         return allItems.filter { $0.category == category }
     }
 
     func save(_ item: StashItem) {
-        modelContext.insert(item)
-        try? modelContext.save()
+        self.modelContext.insert(item)
+        try? self.modelContext.save()
     }
 
     func delete(_ item: StashItem) {
-        modelContext.delete(item)
-        try? modelContext.save()
+        self.modelContext.delete(item)
+        try? self.modelContext.save()
     }
 
     // MARK: - Smart View Queries
 
     func fetchUncookedRecipes() -> [StashItem] {
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
         return allItems.filter { item in
             item.category == .recipe &&
-            (item.flags["hasBeenCooked"] ?? false) == false
+                (item.flags["hasBeenCooked"] ?? false) == false
         }
     }
 
     func fetchToRead() -> [StashItem] {
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
         return allItems.filter { item in
             item.category == .book &&
-            (item.flags["hasBought"] ?? false) == true &&
-            (item.flags["hasRead"] ?? false) == false
+                (item.flags["hasBought"] ?? false) == true &&
+                (item.flags["hasRead"] ?? false) == false
         }
     }
 
     func fetchBandcampQueue() -> [StashItem] {
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
         return allItems.filter { item in
             item.category == .music &&
-            (item.flags["wantToPurchase"] ?? false) == true &&
-            (item.flags["hasBought"] ?? false) == false
+                (item.flags["wantToPurchase"] ?? false) == true &&
+                (item.flags["hasBought"] ?? false) == false
         }
     }
 
     func fetchUnwatchedMovies() -> [StashItem] {
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
         return allItems.filter { item in
             item.category == .movie &&
-            (item.flags["hasWatched"] ?? false) == false
+                (item.flags["hasWatched"] ?? false) == false
         }
     }
 
@@ -113,7 +113,7 @@ class StashRepository: StashRepositoryProtocol {
 
     func search(query: String) -> [StashItem] {
         let lowercased = query.lowercased()
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
 
         return allItems.filter { item in
             item.title.lowercased().contains(lowercased)
@@ -131,12 +131,12 @@ class StashRepository: StashRepositoryProtocol {
             },
             sortBy: [SortDescriptor(\.dateAdded, order: .reverse)]
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+        return (try? self.modelContext.fetch(descriptor)) ?? []
     }
 
     /// Fetch items that have a specific tag
     func fetchByTag(_ tagName: String) -> [StashItem] {
-        let allItems = fetchAll()
+        let allItems = self.fetchAll()
 
         return allItems.filter { item in
             item.tags.contains { tag in
@@ -158,12 +158,12 @@ class StashRepository: StashRepositoryProtocol {
             },
             sortBy: [SortDescriptor(\.dateAdded, order: .reverse)]
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+        return (try? self.modelContext.fetch(descriptor)) ?? []
     }
 
     /// Fetch items in a category with flexible sorting
     func fetchByCategory(_ category: Category, sortedBy option: SortOption) -> [StashItem] {
-        let items = fetchByCategory(category)
+        let items = self.fetchByCategory(category)
 
         switch option {
         case .dateAdded:
@@ -182,28 +182,28 @@ class StashRepository: StashRepositoryProtocol {
 
     /// Fetch "completed" items in a category
     func fetchCompleted(in category: Category) -> [StashItem] {
-        let allInCategory = fetchByCategory(category)
+        let allInCategory = self.fetchByCategory(category)
 
         return allInCategory.filter { item in
             switch item.category {
             case .recipe:
-                return item.flags["hasBeenCooked"] == true
+                item.flags["hasBeenCooked"] == true
             case .book:
-                return item.flags["hasRead"] == true
+                item.flags["hasRead"] == true
             case .movie:
-                return item.flags["hasWatched"] == true
+                item.flags["hasWatched"] == true
             case .music:
-                return item.flags["hasListened"] == true
+                item.flags["hasListened"] == true
             case .clothes, .home:
-                return item.flags["hasBought"] == true
+                item.flags["hasBought"] == true
             case .article:
-                return item.flags["hasRead"] == true
+                item.flags["hasRead"] == true
             case .podcast:
-                return item.flags["hasListened"] == true
+                item.flags["hasListened"] == true
             case .trip:
-                return item.flags["hasVisited"] == true
+                item.flags["hasVisited"] == true
             case .backpack:
-                return item.flags["hasReviewed"] == true
+                item.flags["hasReviewed"] == true
             }
         }
     }

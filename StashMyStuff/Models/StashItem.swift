@@ -26,7 +26,7 @@ enum Category: String, Codable, CaseIterable {
 @Model
 class Tag {
     var name: String
-    var items: [StashItem]  // Many-to-many: a tag belongs to many items
+    var items: [StashItem] // Many-to-many: a tag belongs to many items
 
     init(name: String) {
         self.name = name
@@ -47,12 +47,12 @@ class StashItem {
     var tags: [Tag]
     var flags: [String: Bool]
     var metadata: [String: String]
-    
+
     // Computed properties
     var sourceDomain: String? {
-        sourceURL?.host() // Returns the domain from a URL
+        self.sourceURL?.host() // Returns the domain from a URL
     }
-    
+
     // Initialiser
     init(title: String, category: Category, sourceURL: URL?) {
         self.title = title

@@ -293,6 +293,50 @@ Claude should manage `PROGRESS.md` as follows:
 
 ---
 
+## Linting and CI
+
+This project uses SwiftLint and SwiftFormat. **Always run linting before committing.**
+
+### Pre-Commit Checklist
+
+```bash
+# Run SwiftFormat to auto-fix formatting
+swiftformat StashMyStuff StashMyStuffTests
+
+# Run SwiftLint to check for violations
+swiftlint StashMyStuff StashMyStuffTests
+```
+
+### Common SwiftLint Rules to Follow
+
+| Rule | Wrong | Correct |
+|------|-------|---------|
+| `empty_count` | `array.count == 0` | `array.isEmpty` |
+| `empty_string` | `string == ""` | `string.isEmpty` |
+| `force_try` | `try!` | `do { try } catch {}` or `// swiftlint:disable:next force_try` |
+| `trailing_whitespace` | Lines ending with spaces | No trailing whitespace |
+| `vertical_whitespace_opening_braces` | Empty line after `{` | No empty line after `{` |
+| `vertical_whitespace_closing_braces` | Empty line before `}` | No empty line before `}` |
+
+### Test Code Exceptions
+
+In test files, `try!` is sometimes acceptable for test setup (e.g., creating ModelContainer). Use the inline disable comment:
+
+```swift
+// swiftlint:disable:next force_try
+return try! ModelContainer(for: schema, configurations: [configuration])
+```
+
+### SwiftFormat Rules
+
+SwiftFormat handles most formatting automatically. Key rules:
+- Consistent indentation (4 spaces)
+- Trailing whitespace removal
+- Consistent brace placement
+- Import sorting
+
+---
+
 ## Common Tasks
 
 ### Running the App

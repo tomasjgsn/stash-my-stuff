@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Testing
 import SwiftData
+import Testing
 @testable import StashMyStuff
 
 // Use typealias to avoid ambiguity with system Category type
@@ -21,6 +21,7 @@ typealias ItemCategory = StashMyStuff.Category
 func createTestContainer() -> ModelContainer {
     let schema = Schema([StashItem.self, Tag.self])
     let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
+    // swiftlint:disable:next force_try
     return try! ModelContainer(for: schema, configurations: [configuration])
 }
 
@@ -28,10 +29,9 @@ func createTestContainer() -> ModelContainer {
 
 @Suite("StashItem Model Tests")
 struct StashItemTests {
-
     @Test("Create a basic StashItem")
     @MainActor
-    func testCreateStashItem() {
+    func createStashItem() {
         let item = StashItem(
             title: "Gochujang Chicken",
             category: ItemCategory.recipe,
@@ -41,7 +41,7 @@ struct StashItemTests {
         #expect(item.title == "Gochujang Chicken")
         #expect(item.category == ItemCategory.recipe)
         #expect(item.sourceURL?.absoluteString == "https://cooking.nytimes.com/recipes")
-        #expect(item.notes == "")
+        #expect(item.notes.isEmpty)
         #expect(item.isFavorite == false)
         #expect(item.tags.isEmpty)
         #expect(item.flags.isEmpty)
@@ -110,7 +110,7 @@ struct StashItemTests {
 
     @Test("Favoriting items")
     @MainActor
-    func testFavorite() {
+    func favorite() {
         let item = StashItem(
             title: "Test",
             category: ItemCategory.recipe,
@@ -128,10 +128,9 @@ struct StashItemTests {
 
 @Suite("Tag Model Tests")
 struct TagTests {
-
     @Test("Create a tag")
     @MainActor
-    func testCreateTag() {
+    func createTag() {
         let tag = Tag(name: "favorite")
 
         #expect(tag.name == "favorite")
@@ -140,7 +139,7 @@ struct TagTests {
 
     @Test("Tag-Item relationship")
     @MainActor
-    func testTagRelationship() {
+    func tagRelationship() {
         let tag = Tag(name: "quick")
         let item1 = StashItem(title: "Recipe 1", category: ItemCategory.recipe, sourceURL: nil)
         let item2 = StashItem(title: "Recipe 2", category: ItemCategory.recipe, sourceURL: nil)
@@ -163,7 +162,6 @@ struct TagTests {
 
 @Suite("Category Enum Tests")
 struct CategoryTests {
-
     @Test("All categories are defined")
     func testAllCategories() {
         let allCategories = ItemCategory.allCases
@@ -171,7 +169,7 @@ struct CategoryTests {
     }
 
     @Test("Category raw values")
-    func testCategoryRawValues() {
+    func categoryRawValues() {
         #expect(ItemCategory.recipe.rawValue == "Recipes")
         #expect(ItemCategory.book.rawValue == "Books")
         #expect(ItemCategory.movie.rawValue == "Movies & TV")
@@ -189,9 +187,8 @@ struct CategoryTests {
 
 @Suite("Category Configuration Tests")
 struct CategoryConfigTests {
-
     @Test("All categories have configs")
-    func testAllCategoriesConfigured() {
+    func allCategoriesConfigured() {
         #expect(categoryConfigs.count == 10)
 
         for category in ItemCategory.allCases {
@@ -202,7 +199,7 @@ struct CategoryConfigTests {
     }
 
     @Test("Recipe configuration")
-    func testRecipeConfig() {
+    func recipeConfig() {
         let config = CategoryConfig.config(for: ItemCategory.recipe)
 
         #expect(config?.category == ItemCategory.recipe)
@@ -210,14 +207,14 @@ struct CategoryConfigTests {
         #expect(config?.color == "orange")
         #expect(config?.flags.count == 3)
 
-        let flagKeys = config?.flags.map { $0.key }
+        let flagKeys = config?.flags.map(\.key)
         #expect(flagKeys?.contains("hasBeenCooked") == true)
         #expect(flagKeys?.contains("wouldCookAgain") == true)
         #expect(flagKeys?.contains("writtenIntoRecipeBook") == true)
     }
 
     @Test("Book configuration has rating")
-    func testBookRating() {
+    func bookRating() {
         let config = CategoryConfig.config(for: ItemCategory.book)
         let ratingFlag = config?.flags.first { $0.key == "rating" }
 
@@ -226,7 +223,7 @@ struct CategoryConfigTests {
     }
 
     @Test("Flag consistency across categories")
-    func testFlagConsistency() {
+    func flagConsistency() {
         // "hasBought" should be consistent wherever it appears
         let bookConfig = CategoryConfig.config(for: ItemCategory.book)
         let musicConfig = CategoryConfig.config(for: ItemCategory.music)
@@ -243,10 +240,9 @@ struct CategoryConfigTests {
 
 @Suite("Repository Tests")
 struct RepositoryTests {
-
     @Test("Save and fetch item")
     @MainActor
-    func testSaveAndFetch() {
+    func saveAndFetch() {
         let container = createTestContainer()
         let context = container.mainContext
         let repository = StashRepository(modelContext: context)
@@ -411,7 +407,7 @@ struct RepositoryTests {
         repository.save(item2)
 
         let results = repository.search(query: "chicken")
-        #expect(results.count == 2)  // Matches title and notes
+        #expect(results.count == 2) // Matches title and notes
 
         let beefResults = repository.search(query: "beef")
         #expect(beefResults.count == 1)
@@ -431,7 +427,7 @@ struct RepositoryTests {
 
         repository.delete(item)
 
-        #expect(repository.fetchAll().count == 0)
+        #expect(repository.fetchAll().isEmpty)
     }
 
     @Test("Fetch recent items")
@@ -454,7 +450,7 @@ struct RepositoryTests {
 
     @Test("Fetch with custom sorting")
     @MainActor
-    func testCustomSorting() {
+    func customSorting() {
         let container = createTestContainer()
         let context = container.mainContext
         let repository = StashRepository(modelContext: context)

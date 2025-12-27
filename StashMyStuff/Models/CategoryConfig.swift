@@ -8,8 +8,8 @@
 import Foundation
 
 enum FlagType {
-    case toggle  // Boolean on/off
-    case rating  // 1-5 stars
+    case toggle // Boolean on/off
+    case rating // 1-5 stars
 }
 
 struct FlagDefinition {
@@ -24,7 +24,6 @@ struct CategoryConfig {
     let icon: String
     let color: String
     let flags: [FlagDefinition]
-
 }
 
 let categoryConfigs: [CategoryConfig] = [
@@ -51,7 +50,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "In recipe book",
                 icon: "book.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -78,7 +77,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Rating",
                 icon: "star.fill",
                 type: .rating
-            ),
+            )
         ]
     ),
 
@@ -99,7 +98,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Rating",
                 icon: "star.fill",
                 type: .rating
-            ),
+            )
         ]
     ),
 
@@ -126,7 +125,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Own it",
                 icon: "shippingbox.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -147,7 +146,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Own it",
                 icon: "shippingbox.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -174,7 +173,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Own it",
                 icon: "shippingbox.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -201,7 +200,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Technical Documentation",
                 icon: "questionmark.circle",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -222,7 +221,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Subscribed",
                 icon: "bell.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -243,7 +242,7 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Visited",
                 icon: "checkmark.circle.fill",
                 type: .toggle
-            ),
+            )
         ]
     ),
 
@@ -264,9 +263,9 @@ let categoryConfigs: [CategoryConfig] = [
                 label: "Reference",
                 icon: "bookmark.fill",
                 type: .toggle
-            ),
+            )
         ]
-    ),
+    )
 ]
 
 extension CategoryConfig {

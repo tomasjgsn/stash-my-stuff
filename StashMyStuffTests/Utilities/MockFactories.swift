@@ -27,7 +27,7 @@ enum MockFactories {
         isCooked: Bool = false,
         wouldCookAgain: Bool = false
     ) -> StashItem {
-        let item = createMockStashItem(title: title, category: StashMyStuff.Category.recipe)
+        let item = self.createMockStashItem(title: title, category: StashMyStuff.Category.recipe)
         if isCooked {
             item.flags["hasBeenCooked"] = true
         }
@@ -44,14 +44,14 @@ enum MockFactories {
         hasRead: Bool = false,
         rating: Int? = nil
     ) -> StashItem {
-        let item = createMockStashItem(title: title, category: StashMyStuff.Category.book)
+        let item = self.createMockStashItem(title: title, category: StashMyStuff.Category.book)
         if hasBought {
             item.flags["hasBought"] = true
         }
         if hasRead {
             item.flags["hasRead"] = true
         }
-        if let rating = rating {
+        if let rating {
             item.metadata["rating"] = String(rating)
         }
         return item
