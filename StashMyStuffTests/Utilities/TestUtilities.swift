@@ -3,9 +3,12 @@ import SwiftData
 @testable import StashMyStuff
 
 enum TestUtilities {
+    /// Creates an in-memory model container for testing
+    @MainActor
     static func createTestModelContainer() throws -> ModelContainer {
         let schema = Schema([
-            // Models will be added here in Phase 1
+            StashItem.self,
+            Tag.self
         ])
 
         let modelConfiguration = ModelConfiguration(
@@ -17,9 +20,5 @@ enum TestUtilities {
             for: schema,
             configurations: [modelConfiguration]
         )
-    }
-
-    static func createTestDependencyContainer() -> DependencyContainer {
-        DependencyContainer()
     }
 }

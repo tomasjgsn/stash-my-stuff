@@ -7,6 +7,9 @@ struct StashMyStuffApp: App {
         WindowGroup {
             ContentView()
         }
+        // ModelContainer for SwiftData persistence
+        // Creates database for StashItem and Tag models
+        .modelContainer(for: [StashItem.self, Tag.self])
 
         #if os(macOS)
             Settings {

@@ -19,6 +19,18 @@
 		D925CEFD2EFF22630061B06E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFA2EFF22630061B06E /* AppCoordinator.swift */; };
 		D925CEFE2EFF22630061B06E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFB2EFF22630061B06E /* Coordinator.swift */; };
 		D925CF012EFF226B0061B06E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CEFF2EFF226B0061B06E /* Extensions.swift */; };
+		D925CF032EFF2F0F0061B06E /* PracticeLesson1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CF022EFF2F0F0061B06E /* PracticeLesson1.swift */; };
+		D925CF052EFF338C0061B06E /* PracticeLesson2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CF042EFF338C0061B06E /* PracticeLesson2.swift */; };
+		D925CF072EFF38470061B06E /* PracticeLesson3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D925CF062EFF38470061B06E /* PracticeLesson3.swift */; };
+		D9F6B6DF2EFF664D00FA99A4 /* PracticeLesson4.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6B6DE2EFF664D00FA99A4 /* PracticeLesson4.swift */; };
+		D9F6B6E12EFF6CBC00FA99A4 /* StashItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6B6E02EFF6CBC00FA99A4 /* StashItem.swift */; };
+		D9F6B6E32EFF742500FA99A4 /* CategoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6B6E22EFF742500FA99A4 /* CategoryConfig.swift */; };
+		D9F6B6E52EFF797700FA99A4 /* StashRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F6B6E42EFF797700FA99A4 /* StashRepository.swift */; };
+		A1000004001D0001 /* StashMyStuffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004001F0001 /* StashMyStuffTests.swift */; };
+		A1000004001D0002 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004001F0002 /* TestUtilities.swift */; };
+		A1000004001D0003 /* MockFactories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004001F0003 /* MockFactories.swift */; };
+		A1000005001D0001 /* StashMyStuffUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000005001F0001 /* StashMyStuffUITests.swift */; };
+		A1000005001D0002 /* StashMyStuffUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000005001F0002 /* StashMyStuffUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +79,13 @@
 		D925CEFA2EFF22630061B06E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D925CEFB2EFF22630061B06E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D925CEFF2EFF226B0061B06E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D925CF022EFF2F0F0061B06E /* PracticeLesson1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLesson1.swift; sourceTree = "<group>"; };
+		D925CF042EFF338C0061B06E /* PracticeLesson2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLesson2.swift; sourceTree = "<group>"; };
+		D925CF062EFF38470061B06E /* PracticeLesson3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLesson3.swift; sourceTree = "<group>"; };
+		D9F6B6DE2EFF664D00FA99A4 /* PracticeLesson4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLesson4.swift; sourceTree = "<group>"; };
+		D9F6B6E02EFF6CBC00FA99A4 /* StashItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashItem.swift; sourceTree = "<group>"; };
+		D9F6B6E22EFF742500FA99A4 /* CategoryConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryConfig.swift; sourceTree = "<group>"; };
+		D9F6B6E42EFF797700FA99A4 /* StashRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +182,12 @@
 		A1000001001G0003 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D925CF022EFF2F0F0061B06E /* PracticeLesson1.swift */,
+				D925CF042EFF338C0061B06E /* PracticeLesson2.swift */,
+				D925CF062EFF38470061B06E /* PracticeLesson3.swift */,
+				D9F6B6DE2EFF664D00FA99A4 /* PracticeLesson4.swift */,
+				D9F6B6E02EFF6CBC00FA99A4 /* StashItem.swift */,
+				D9F6B6E22EFF742500FA99A4 /* CategoryConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +209,7 @@
 		A1000001001G0006 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D9F6B6E42EFF797700FA99A4 /* StashRepository.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -448,7 +474,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F6B6E52EFF797700FA99A4 /* StashRepository.swift in Sources */,
 				D925CEFD2EFF22630061B06E /* AppCoordinator.swift in Sources */,
+				D9F6B6E12EFF6CBC00FA99A4 /* StashItem.swift in Sources */,
+				D9F6B6E32EFF742500FA99A4 /* CategoryConfig.swift in Sources */,
 				D925CF012EFF226B0061B06E /* Extensions.swift in Sources */,
 				D925CEFE2EFF22630061B06E /* Coordinator.swift in Sources */,
 				A1000001001D0001 /* StashMyStuffApp.swift in Sources */,
@@ -479,6 +508,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000004001D0001 /* StashMyStuffTests.swift in Sources */,
+				A1000004001D0002 /* TestUtilities.swift in Sources */,
+				A1000004001D0003 /* MockFactories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +518,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000005001D0001 /* StashMyStuffUITests.swift in Sources */,
+				A1000005001D0002 /* StashMyStuffUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

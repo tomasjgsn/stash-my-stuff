@@ -16,7 +16,7 @@ This is not a generic bookmark app. It's a **personal curation system** where ev
 
 ## Core Use Cases & Categories
 
-The app is built around **7 categories**, each with custom lifecycle flags:
+The app is built around **10 categories**, each with custom lifecycle flags:
 
 ### 1. Recipes
 **Sources:** Instagram, web links, NYT Cooking, YouTube, etc.
@@ -102,8 +102,8 @@ The app is built around **7 categories**, each with custom lifecycle flags:
 
 ---
 
-### 6. Furniture & Home
-**Sources:** Design blogs, Instagram, retail sites
+### 6. Home
+**Sources:** Design blogs, IKEA, Wayfair, West Elm, retail sites
 
 | Flag | Icon | Description |
 |------|------|-------------|
@@ -120,19 +120,67 @@ The app is built around **7 categories**, each with custom lifecycle flags:
 
 ---
 
-### 7. Links (Misc)
-**Sources:** Anything — articles, tools, references, interesting finds
+### 7. Articles
+**Sources:** Medium, Substack, news sites, blogs
 
 | Flag | Icon | Description |
 |------|------|-------------|
-| `hasRead` | ✓ | Read/reviewed it |
+| `hasRead` | ✓ | Read it |
 | `isReference` | 📌 | Keep as reference |
 
 **Smart Views:**
-- "Unread" — saved but not read
+- "To Read" — saved but not read
 - "References" — pinned for later
 
-**Use case:** The catch-all for anything that doesn't fit recipes, books, movies, music, clothes, or furniture. Articles, dev tools, random interesting sites, resources, etc.
+**Use case:** Long-form articles, blog posts, essays, newsletters worth saving
+
+---
+
+### 8. Podcasts
+**Sources:** Apple Podcasts, Spotify, podcast directories
+
+| Flag | Icon | Description |
+|------|------|-------------|
+| `hasListened` | 🎧 | Listened to it |
+| `isSubscribed` | ✓ | Subscribed to show |
+
+**Smart Views:**
+- "Queue" — want to listen
+- "Listened" — completed
+
+**Metadata:** Episode number, duration, show name
+
+---
+
+### 9. Trips
+**Sources:** Airbnb, TripAdvisor, travel blogs, recommendations
+
+| Flag | Icon | Description |
+|------|------|-------------|
+| `wantToVisit` | 🗺 | On the travel wishlist |
+| `hasVisited` | ✓ | Been there |
+
+**Smart Views:**
+- "Bucket List" — want to visit
+- "Visited" — traveled to
+
+**Metadata:** Location, dates, trip type (weekend/vacation)
+
+---
+
+### 10. Backpack
+**Sources:** Anything that doesn't fit other categories
+
+| Flag | Icon | Description |
+|------|------|-------------|
+| `hasReviewed` | ✓ | Checked it out |
+| `isReference` | 📌 | Keep as reference |
+
+**Smart Views:**
+- "Unreviewed" — saved but not checked
+- "References" — pinned for later
+
+**Use case:** The catch-all for random saves — dev tools, interesting finds, gift ideas, anything else. The digital junk drawer.
 
 ---
 
@@ -141,13 +189,16 @@ The app is built around **7 categories**, each with custom lifecycle flags:
 ```swift
 // Category defines available flags
 enum Category: String, Codable, CaseIterable {
-    case recipes
-    case books
-    case movies
-    case music
-    case clothes
-    case furniture
-    case links      // Catch-all for misc items
+    case recipe = "Recipes"
+    case book = "Books"
+    case movie = "Movies & TV"
+    case music = "Music"
+    case clothes = "Clothes"
+    case home = "Home"
+    case article = "Articles"
+    case podcast = "Podcasts"
+    case trips = "Trips"
+    case backpack = "Backpack"     // Catch-all for misc items
 }
 
 @Model class StashItem {
@@ -203,7 +254,7 @@ struct FlagDefinition {
 
 let categoryConfigs: [CategoryConfig] = [
     CategoryConfig(
-        category: .recipes,
+        category: .recipe,
         icon: "fork.knife",
         flags: [
             FlagDefinition(key: "hasBeenCooked", label: "Cooked", icon: "flame"),
@@ -239,17 +290,22 @@ let categoryConfigs: [CategoryConfig] = [
 │   CATEGORIES                                             │
 │   ┌──────────┐ ┌──────────┐ ┌──────────┐               │
 │   │  🍳      │ │  📚      │ │  🎬      │               │
-│   │ Recipes  │ │  Books   │ │  Movies  │               │
+│   │ Recipes  │ │  Books   │ │ Movies   │               │
 │   │    12    │ │    8     │ │    24    │               │
 │   └──────────┘ └──────────┘ └──────────┘               │
 │   ┌──────────┐ ┌──────────┐ ┌──────────┐               │
 │   │  🎵      │ │  👕      │ │  🏠      │               │
-│   │  Music   │ │ Clothes  │ │ Furniture│               │
+│   │  Music   │ │ Clothes  │ │   Home   │               │
 │   │    31    │ │    5     │ │    7     │               │
 │   └──────────┘ └──────────┘ └──────────┘               │
+│   ┌──────────┐ ┌──────────┐ ┌──────────┐               │
+│   │  📰      │ │  🎙      │ │  ✈️      │               │
+│   │ Articles │ │ Podcasts │ │  Trips   │               │
+│   │    14    │ │    9     │ │    3     │               │
+│   └──────────┘ └──────────┘ └──────────┘               │
 │   ┌──────────┐                                          │
-│   │  🔗      │                                          │
-│   │  Links   │  ← Misc/catch-all                        │
+│   │  🎒      │                                          │
+│   │ Backpack │  ← Catch-all for misc                    │
 │   │    19    │                                          │
 │   └──────────┘                                          │
 │                                                          │
@@ -361,15 +417,19 @@ let categoryConfigs: [CategoryConfig] = [
 │  │  📷     │  nytcooking.com                           │
 │  └─────────┘  (auto-extracted)                         │
 │                                                          │
-│  CATEGORY                                                │
+│  CATEGORY (scroll horizontally)                          │
 │  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐          │
 │  │🍳 *    │ │ 📚     │ │ 🎬     │ │ 🎵     │          │
 │  │Recipe  │ │ Book   │ │ Movie  │ │ Music  │          │
 │  └────────┘ └────────┘ └────────┘ └────────┘          │
-│  ┌────────┐ ┌────────┐ ┌────────┐                      │
-│  │ 👕     │ │ 🏠     │ │ 🔗     │                      │
-│  │Clothes │ │Furniture│ │ Links  │                      │
-│  └────────┘ └────────┘ └────────┘                      │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐          │
+│  │ 👕     │ │ 🏠     │ │ 📰     │ │ 🎙     │          │
+│  │Clothes │ │  Home  │ │Articles│ │Podcasts│          │
+│  └────────┘ └────────┘ └────────┘ └────────┘          │
+│  ┌────────┐ ┌────────┐                                 │
+│  │ ✈️     │ │ 🎒     │                                 │
+│  │ Trips  │ │Backpack│                                 │
+│  └────────┘ └────────┘                                 │
 │                                                          │
 │  * Auto-detected from URL                               │
 │                                                          │
@@ -403,11 +463,14 @@ let categoryConfigs: [CategoryConfig] = [
 |----------|--------------|
 | Recipes | Orange |
 | Books | Indigo |
-| Movies | Purple |
+| Movies & TV | Purple |
 | Music | Pink |
 | Clothes | Teal |
-| Furniture | Brown |
-| Links | Gray |
+| Home | Brown |
+| Articles | Blue |
+| Podcasts | Green |
+| Trips | Cyan |
+| Backpack | Gray |
 
 ### Animations
 
