@@ -310,6 +310,88 @@ Working share extension that saves links with metadata to the main app.
 
 ---
 
+## Phase 4.5: Custom UI Design with Figma
+**Goal:** Elevate the app's visual design from functional to distinctive using Figma.
+
+> **Why This Phase?** Most developer-designed apps look generic. This phase takes a step back from code to focus on visual design, creating a polished, distinctive UI inspired by top agencies like [Ragged Edge](https://raggededge.com/).
+
+### Prerequisites
+- Working app from Phases 1-4
+- Free Figma account ([figma.com](https://figma.com))
+- Design inspiration research completed
+
+### Figma Free Plan Strategy
+
+The free tier limits you to 3 files. Use them strategically:
+
+| File | Purpose |
+|------|---------|
+| 1. Design System | Colors, typography, components |
+| 2. iOS Screens | All app screen designs |
+| 3. Prototype | Interactive flows |
+
+### Milestones
+
+#### 4.5.1 — Figma Fundamentals
+- [ ] Set up Figma account and workspace
+- [ ] Learn frames, auto layout, and components
+- [ ] Create file structure for design system
+- [ ] Build first reusable components
+
+#### 4.5.2 — Design System File
+- [ ] Define refined color palette (warmer, more sophisticated)
+- [ ] Create typography scale with personality
+- [ ] Build all button components (with states)
+- [ ] Build card components (glass variants)
+- [ ] Build list row components
+- [ ] Build form elements
+
+#### 4.5.3 — Typography & Color Refinement
+- [ ] Select or customize typefaces
+- [ ] Create warm, cohesive color palette
+- [ ] Ensure accessibility (contrast ratios)
+- [ ] Define dark mode variants
+
+#### 4.5.4 — Screen Designs
+- [ ] Redesign Home screen with improved hierarchy
+- [ ] Redesign Category list with better visual rhythm
+- [ ] Redesign Item detail with cleaner layout
+- [ ] Design Add/Edit sheets
+- [ ] Design empty states
+- [ ] Design error states
+
+#### 4.5.5 — Prototyping & Handoff
+- [ ] Create interactive prototype for key flows
+- [ ] Test flows for usability
+- [ ] Export assets for Xcode
+- [ ] Document specifications for SwiftUI updates
+
+### Design Principles (Ragged Edge-Inspired)
+
+| Principle | Application |
+|-----------|-------------|
+| Restrained elegance | Generous whitespace, no visual clutter |
+| Custom typography | SF Pro Rounded + distinctive accents |
+| Warm color palette | Tinted neutrals, sophisticated category colors |
+| Grid discipline | Consistent 8pt grid, modular layouts |
+| Meaningful motion | Purpose-driven animations only |
+| Data as story | "12 uncooked recipes" not just "12 items" |
+
+### Deliverable
+Complete Figma design system and screen designs ready for implementation.
+
+### Success Criteria
+- [ ] Design system file with all reusable components
+- [ ] All core screens designed in Figma
+- [ ] Interactive prototype for 3 key user flows
+- [ ] Designs work in both light and dark mode
+- [ ] All colors pass WCAG accessibility contrast checks
+- [ ] Assets exported and ready for Xcode
+
+> **Full Lesson Plan**: See `Lessons/Phase4.5-UI-Design/README.md`
+
+---
+
 ## Phase 5: CloudKit Sync & Paid Features ⚠️
 
 > **⚠️ REQUIRES PAID APPLE DEVELOPER ACCOUNT ($99/year)**

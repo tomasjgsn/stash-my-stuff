@@ -10,9 +10,10 @@
 |-------|--------|----------|-------------|
 | Phase 0: Foundation | COMPLETE | 100% | N/A (setup only) |
 | Phase 1: Data Layer | COMPLETE | 100% | UNLOCKED |
-| Phase 2: Design System | LOCKED | 0% | LOCKED |
+| Phase 2: Design System | READY | 0% | LOCKED |
 | Phase 3: Core Screens | LOCKED | 0% | LOCKED |
 | Phase 4: Share Extension | LOCKED | 0% | LOCKED |
+| Phase 4.5: UI Design (Figma) | LOCKED | 0% | N/A (design phase) |
 | Phase 5: CloudKit | LOCKED | 0% | LOCKED |
 | Phase 6: Polish | LOCKED | 0% | LOCKED |
 
@@ -69,6 +70,14 @@
 - [ ] CloudKit basics
 - [ ] Error handling
 - [x] Testing (unit, UI)
+
+### Design (Phase 4.5)
+- [ ] Figma fundamentals
+- [ ] Auto layout
+- [ ] Components and variants
+- [ ] Typography systems
+- [ ] Color theory for UI
+- [ ] Prototyping basics
 
 ---
 
@@ -181,6 +190,47 @@ Add support for a new content type (e.g., podcasts) that:
 - Detects podcast URLs from common platforms
 - Extracts episode metadata
 - Creates appropriate category and flags
+
+---
+
+## Phase 4.5: UI Design with Figma - Detailed Progress
+
+**Status**: LOCKED
+**Progress**: ░░░░░░░░░░ 0%
+
+> This phase focuses on visual design in Figma, not code. Complete Phases 1-4 first.
+
+### Lessons
+- [ ] Lesson 4.5.1: Figma Fundamentals (Standard)
+- [ ] Lesson 4.5.2: Design System File (Deep Dive)
+- [ ] Lesson 4.5.3: Typography & Color Refinement (Standard)
+- [ ] Lesson 4.5.4: Home Screen Design (Standard)
+- [ ] Lesson 4.5.5: Category & Detail Screens (Deep Dive)
+- [ ] Lesson 4.5.6: Prototyping & Handoff (Standard)
+
+### Design Skills
+- [ ] Figma frames and auto layout
+- [ ] Creating reusable components
+- [ ] Component variants
+- [ ] Basic prototyping
+- [ ] Asset export
+- [ ] Design specifications
+
+### Deliverables
+- [ ] Design System Figma file
+- [ ] iOS Screens Figma file
+- [ ] Interactive Prototype file
+- [ ] Exported assets for Xcode
+- [ ] Updated SwiftUI design tokens
+
+### Boss Battle
+**Status**: N/A (Design phase - no code challenge)
+
+**Design Review**:
+Present your Figma designs and articulate:
+- Why each major design decision was made
+- How the design improves on Phase 2's system
+- What accessibility considerations were included
 
 ---
 
