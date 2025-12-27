@@ -13,7 +13,7 @@ A curated wishlist & lifecycle tracker for the things you want to cook, read, wa
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 0 | ✅ Complete | Foundation & Project Setup |
-| Phase 1 | 🔲 Pending | Data Layer & Core Models |
+| Phase 1 | ✅ Complete | Data Layer & Core Models |
 | Phase 2 | 🔲 Pending | Design System & UI Components |
 | Phase 3 | 🔲 Pending | Core App Screens |
 | Phase 4 | 🔲 Pending | Share Extension & Metadata |
