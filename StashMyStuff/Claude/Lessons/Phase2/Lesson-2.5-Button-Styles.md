@@ -220,19 +220,24 @@ A button that matches our glass design language:
 
 ```swift
 // MARK: - Glass Button Style
-/// A button with native Liquid Glass effect
+/// A button with glass morphism effect
 struct GlassButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(DesignTokens.Typography.headline)
             .padding(.horizontal, DesignTokens.Spacing.lg)
             .padding(.vertical, DesignTokens.Spacing.md)
-            .glassEffect(
-                .regular.interactive(),  // .interactive() handles press states automatically
-                in: .rect(cornerRadius: DesignTokens.Glass.buttonRadius)
-            )
-            // Note: .interactive() handles opacity/scale press feedback automatically
-            // No need for manual isPressed animations!
+            .background {
+                RoundedRectangle(cornerRadius: DesignTokens.Radius.md)
+                    .fill(.ultraThinMaterial)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: DesignTokens.Radius.md)
+                            .stroke(DesignTokens.Colors.glassBorder, lineWidth: 1)
+                    }
+            }
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
@@ -240,8 +245,6 @@ extension ButtonStyle where Self == GlassButtonStyle {
     static var glass: GlassButtonStyle { GlassButtonStyle() }
 }
 ```
-
-**Key insight:** With `.glassEffect(.regular.interactive(), ...)`, the system handles press state feedback automatically. No need for manual opacity/scale animations — the Liquid Glass responds to touches natively.
 
 ---
 

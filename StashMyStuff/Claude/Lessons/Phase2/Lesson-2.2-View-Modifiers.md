@@ -354,7 +354,7 @@ Text("Hello")
     .foregroundStyle(isSelected ? .blue : .gray)
 ```
 
-### Pattern 2: Custom Conditional Modifier
+### Pattern 2: Custom Conditional Modifiers
 
 Add this to a new utilities file:
 
@@ -370,8 +370,9 @@ import SwiftUI
 
 extension View {
     /// Applies a modifier only when a condition is true
+    /// Usage: Text("Hello").when(isHighlighted) { $0.bold() }
     @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    func when<Content: View>(_ condition: Bool, apply transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {
@@ -380,40 +381,22 @@ extension View {
     }
 
     /// Applies one modifier when true, another when false
+    /// Usage: Text("Status").whenElse(isActive, then: { $0.foregroundStyle(.green) }, else: { $0.foregroundStyle(.gray) })
     @ViewBuilder
-    func `if`<TrueContent: View, FalseContent: View>(
+    func whenElse<TrueContent: View, FalseContent: View>(
         _ condition: Bool,
-        if ifTransform: (Self) -> TrueContent,
-        else elseTransform: (Self) -> FalseContent
+        then trueTransform: (Self) -> TrueContent,
+        else falseTransform: (Self) -> FalseContent
     ) -> some View {
         if condition {
-            ifTransform(self)
+            trueTransform(self)
         } else {
-            elseTransform(self)
+            falseTransform(self)
         }
     }
-}
-```
 
-**What's NEW here:**
-- `@ViewBuilder` allows the function to return different view types from if/else
-- Backticks around `if` let us use a keyword as a function name
-- This enables clean conditional styling:
-
-```swift
-Text("Item")
-    .if(isHighlighted) { view in
-        view
-            .background(.yellow)
-            .fontWeight(.bold)
-    }
-```
-
-### Pattern 3: Optional-Based Modifier
-
-```swift
-extension View {
     /// Applies a modifier if the optional has a value
+    /// Usage: Text("Item").ifLet(item.imageURL) { view, url in view.overlay(AsyncImage(url: url)) }
     @ViewBuilder
     func ifLet<T, Content: View>(_ optional: T?, transform: (Self, T) -> Content) -> some View {
         if let value = optional {
@@ -423,8 +406,30 @@ extension View {
         }
     }
 }
+```
 
-// Usage
+**What's NEW here:**
+- `@ViewBuilder` allows the function to return different view types from if/else
+- We use `when` instead of `if` to avoid Swift keyword conflicts and overload issues
+- This enables clean conditional styling:
+
+```swift
+// Apply modifier only when condition is true
+Text("Item")
+    .when(isHighlighted) { view in
+        view
+            .background(.yellow)
+            .fontWeight(.bold)
+    }
+
+// Different modifiers for true/false
+Text("Status")
+    .whenElse(isActive,
+        then: { $0.foregroundStyle(.green) },
+        else: { $0.foregroundStyle(.gray) }
+    )
+
+// Apply modifier only if optional has a value
 Text("Item")
     .ifLet(item.imageURL) { view, url in
         view.overlay(AsyncImage(url: url))
@@ -580,6 +585,8 @@ struct FlowLayout: Layout {
 
 ## Exercise: Your Turn
 
+These exercises are implemented in a new file: `StashMyStuff/DesignSystem/Modifiers/BadgeModifiers.swift`
+
 ### Exercise 1: Create a Favorite Badge Modifier
 
 Create a modifier that adds a small heart icon overlay to any view when an item is favorited:
@@ -594,6 +601,7 @@ Image("thumbnail")
 <summary>Solution</summary>
 
 ```swift
+/// Adds a heart icon overlay to indicate favorited items
 struct FavoriteBadgeModifier: ViewModifier {
     let isFavorite: Bool
 
@@ -604,10 +612,9 @@ struct FavoriteBadgeModifier: ViewModifier {
                     Image(systemName: "heart.fill")
                         .font(DesignTokens.Typography.caption)
                         .foregroundStyle(.red)
-                        .padding(DesignTokens.Spacing.xxs)
-                        .background(.white.opacity(0.9))
-                        .clipShape(Circle())
-                        .offset(x: 4, y: -4)
+                        .padding(DesignTokens.Spacing.xs)
+                        .glassEffect(.regular, in: .circle)  // Use Liquid Glass!
+                        .offset(x: 8, y: -8)
                 }
             }
     }
@@ -615,21 +622,111 @@ struct FavoriteBadgeModifier: ViewModifier {
 
 extension View {
     func favoriteBadge(isFavorite: Bool) -> some View {
-        self.modifier(FavoriteBadgeModifier(isFavorite: isFavorite))
+        modifier(FavoriteBadgeModifier(isFavorite: isFavorite))
     }
 }
 ```
 
+**Note:** We use `.glassEffect(.regular, in: .circle)` instead of `.background(.white).clipShape(Circle())` because:
+1. It adapts to dark mode automatically
+2. It matches the app's Liquid Glass design
+3. One modifier replaces two
+
 </details>
 
-### Exercise 2: Create a Highlight Modifier
+### Exercise 2: Create a Rotating Glow Modifier
 
-Create a modifier that adds a pulsing glow effect for "new" items:
+Create a modifier that adds a rotating tonal rainbow glow effect (Apple Intelligence style) using the category's color:
+
+```swift
+// Target usage:
+StashItemCard(item: item)
+    .rotatingGlow(isNew, category: item.category, cornerRadius: 12)
+```
 
 <details>
-<summary>Hint</summary>
+<summary>Solution</summary>
 
-Use `.shadow()` with a larger radius and animate it with `@State` and `.animation()`.
+```swift
+/// Adds a rotating tonal rainbow glow effect based on a single color
+struct RotatingGlowModifier: ViewModifier {
+    let isActive: Bool
+    let color: Color
+    let cornerRadius: CGFloat
+
+    @State private var rotation: Double = 0
+
+    // Creates a tonal rainbow by shifting hue around the base color
+    private var tonalGradientColors: [Color] {
+        let uiColor = UIColor(color)
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        uiColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+
+        return [
+            Color(hue: hue - 0.08, saturation: saturation * 0.8, brightness: brightness),
+            Color(hue: hue - 0.04, saturation: saturation, brightness: brightness * 1.1),
+            color,
+            Color(hue: hue + 0.04, saturation: saturation, brightness: brightness * 1.1),
+            Color(hue: hue + 0.08, saturation: saturation * 0.8, brightness: brightness),
+            Color(hue: hue - 0.08, saturation: saturation * 0.8, brightness: brightness)
+        ]
+    }
+
+    private var tonalGradient: AngularGradient {
+        AngularGradient(colors: tonalGradientColors, center: .center, angle: .degrees(rotation))
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .background {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 8)
+                        .blur(radius: 16)
+                        .opacity(0.7)
+                }
+            }
+            .overlay {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 4)
+                        .blur(radius: 3)
+                }
+            }
+            .overlay {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 2)
+                }
+            }
+            .onAppear {
+                guard isActive else { return }
+                withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
+                    rotation = 360
+                }
+            }
+    }
+}
+
+extension View {
+    func rotatingGlow(_ isActive: Bool, color: Color, cornerRadius: CGFloat = DesignTokens.Radius.md) -> some View {
+        modifier(RotatingGlowModifier(isActive: isActive, color: color, cornerRadius: cornerRadius))
+    }
+
+    func rotatingGlow(_ isActive: Bool, category: Category, cornerRadius: CGFloat = DesignTokens.Radius.md) -> some View {
+        modifier(RotatingGlowModifier(isActive: isActive, color: category.color, cornerRadius: cornerRadius))
+    }
+}
+```
+
+**Key concepts:**
+- Uses `AngularGradient` that rotates continuously
+- Creates a "tonal rainbow" by shifting hue ±8% around the base color
+- Three layers: outer glow (blurred), mid glow, and sharp border
+- Animation runs forever without reversing
 
 </details>
 
@@ -643,14 +740,21 @@ You now have a set of reusable modifiers in `DesignSystem/Modifiers/`:
    - `.glassCard()` - Native Liquid Glass card with padding
    - `.glassButton()` - Interactive glass for tappable elements
    - `.shadow(Shadow)` - Token-based shadows (for non-glass elements)
+   - `FlowLayout` - Custom layout for wrapping badges
 
 2. **CategoryModifier.swift**
    - `.categoryAccent()` - Tint with category color
    - `.categoryBadge()` - Styled pill badge
 
 3. **ConditionalModifiers.swift**
-   - `.if(condition)` - Conditional modifier application
+   - `.when(condition)` - Conditional modifier application
+   - `.whenElse(condition, then:, else:)` - Different modifiers for each case
    - `.ifLet(optional)` - Optional-based modifier
+
+4. **BadgeModifiers.swift**
+   - `.favoriteBadge(isFavorite:)` - Heart overlay for favorited items
+   - `.rotatingGlow(_:color:cornerRadius:)` - Tonal rainbow rotating glow
+   - `.rotatingGlow(_:category:cornerRadius:)` - Category-colored rotating glow
 
 ---
 

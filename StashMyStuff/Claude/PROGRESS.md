@@ -10,7 +10,7 @@
 |-------|--------|----------|-------------|
 | Phase 0: Foundation | COMPLETE | 100% | N/A (setup only) |
 | Phase 1: Data Layer | COMPLETE | 100% | UNLOCKED |
-| Phase 2: Design System | READY | 0% | LOCKED |
+| Phase 2: Design System | IN PROGRESS | 25% | LOCKED |
 | Phase 3: Core Screens | LOCKED | 0% | LOCKED |
 | Phase 4: Share Extension | LOCKED | 0% | LOCKED |
 | Phase 4.5: UI Design (Figma) | LOCKED | 0% | N/A (design phase) |
@@ -31,21 +31,24 @@
 - [x] Classes
 - [x] Enums with associated values
 - [x] Protocols
-- [ ] Extensions
+- [x] Extensions
 - [x] Closures
-- [ ] Generics
+- [x] Generics
 
 ### SwiftUI
 - [ ] View protocol
 - [ ] @State
 - [ ] @Binding
 - [ ] @Observable
-- [ ] View modifiers
+- [x] View modifiers
+- [x] ViewModifier protocol
+- [x] @ViewBuilder
 - [ ] Stacks (VStack, HStack, ZStack)
 - [ ] Lists and ForEach
 - [ ] Navigation
 - [ ] Sheets and alerts
-- [ ] Custom components
+- [x] Custom components
+- [x] Custom Layout protocol
 
 ### SwiftData
 - [x] @Model macro
@@ -117,12 +120,12 @@ Create a `Wishlist` SwiftData model with:
 
 ## Phase 2: Design System - Detailed Progress
 
-**Status**: LOCKED
-**Progress**: ░░░░░░░░░░ 0%
+**Status**: IN PROGRESS
+**Progress**: ██░░░░░░░░ 25%
 
 ### Lessons
-- [ ] Lesson 2.1: Design Tokens in Swift (Micro)
-- [ ] Lesson 2.2: View Modifiers Deep Dive (Standard)
+- [x] Lesson 2.1: Design Tokens in Swift (Micro)
+- [x] Lesson 2.2: View Modifiers Deep Dive (Standard)
 - [ ] Lesson 2.3: Building GlassCard Component (Standard)
 - [ ] Lesson 2.4: SF Symbols and Icons (Micro)
 - [ ] Lesson 2.5: Custom Button Styles (Standard)
@@ -314,7 +317,9 @@ Make the app fully accessible:
 | 2025-12-26 | Lesson 1.7: Category Configuration System | Dictionaries, Structs, Configuration patterns | Built complete flag system for all 10 categories, learned flexible data storage with dictionaries |
 | 2025-12-26 | Lesson 1.8: Repository Pattern | @Observable, FetchDescriptor, Predicates, Access control (private) | Built data access layer with smart view queries, learned predicate syntax and variable capture |
 | 2025-12-26 | Lesson 1.9-1.10: Queries and Unit Testing | Predicates, Sorting, Unit testing, Testing framework | Completed advanced queries with in-memory filtering, comprehensive test suite with 25 passing tests |
+| 2025-12-27 | Lesson 2.1: Design Tokens | Enums as namespaces, Static properties, Semantic naming | Built complete DesignTokens with colors, spacing, typography, radius, glass config |
+| 2025-12-27 | Lesson 2.2: View Modifiers | ViewModifier protocol, @ViewBuilder, Extensions, Generics, Custom Layout | Built GlassModifier, CategoryModifier, ConditionalModifiers, BadgeModifiers with rotating tonal rainbow glow |
 
 ---
 
-*Last updated: 2025-12-26*
+*Last updated: 2025-12-27*

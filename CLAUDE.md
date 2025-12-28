@@ -293,6 +293,72 @@ Claude should manage `PROGRESS.md` as follows:
 
 ---
 
+## Liquid Glass Design Guidelines (iOS 26+)
+
+This app uses Apple's Liquid Glass design language. Follow these official guidelines when building UI.
+
+### Core Design Principles
+
+| Principle | Description |
+|-----------|-------------|
+| **Hierarchy** | Glass floats on the navigation layer; content sits below |
+| **Content-First** | UI elements recede when users are reading/creating/watching |
+| **Harmony** | Rounded forms follow natural touch patterns |
+| **Consistency** | Universal design across iOS, iPadOS, macOS |
+
+### When to Use Glass
+
+| Use Glass For | Don't Use Glass For |
+|---------------|---------------------|
+| Navigation controls (toolbars, tab bars) | Main content areas |
+| Floating action buttons | Background fills |
+| Cards that overlay content | Every UI element |
+| Interactive controls (buttons, toggles) | Static decorative elements |
+
+### API Quick Reference
+
+```swift
+// Basic glass effect
+view.glassEffect(.regular, in: .rect(cornerRadius: 16))
+
+// Interactive glass (for buttons, tappable elements)
+view.glassEffect(.regular.interactive(), in: .capsule)
+
+// Tinted glass (for category-colored elements)
+view.glassEffect(.regular.tint(.orange), in: .rect(cornerRadius: 16))
+
+// Morphing glass shapes (wrap in container)
+GlassEffectContainer {
+    view.glassEffect(.regular, in: shape)
+         .glassEffectID("id", in: namespace)
+}
+```
+
+### Accessibility Requirements
+
+- **Contrast**: Maintain strong text/icon contrast against glass backgrounds
+- **Dynamic Type**: All text must scale with system font size settings
+- **Reduce Motion**: Respect user's motion preferences for animations
+- **Color Independence**: Don't rely solely on color to convey information
+
+### Our Design System Implementation
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| `.glassCard()` | `GlassModifier.swift` | Standard glass card with padding |
+| `.glassButton()` | `GlassModifier.swift` | Interactive glass for buttons |
+| `GlassCard` | `GlassCard.swift` | Reusable container component |
+| `CategoryGlassCard` | `GlassCard.swift` | Tinted glass with category color |
+| `.rotatingGlow()` | `BadgeModifiers.swift` | Tonal rainbow highlight animation |
+
+### Sources
+
+- [Apple Newsroom: Liquid Glass Introduction](https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/)
+- [Apple Developer: Adopting Liquid Glass](https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass)
+- [Apple Developer: Applying Liquid Glass to Custom Views](https://developer.apple.com/documentation/SwiftUI/Applying-Liquid-Glass-to-custom-views)
+
+---
+
 ## Linting and CI
 
 This project uses SwiftLint and SwiftFormat. **Always run linting before committing.**
@@ -354,9 +420,15 @@ SwiftFormat handles most formatting automatically. Key rules:
 
 ---
 
-## Current Phase: 1 (Data Layer) - READY TO START
+## Current Phase: 2 (Design System) - IN PROGRESS
 
-**Next Step**: Begin Lesson 1.1 (Swift Structs vs Classes)
+**Completed:**
+- Phase 0: Foundation & Project Setup
+- Phase 1: Data Layer & Core Models
+- Lesson 2.1: Design Tokens
+- Lesson 2.2: View Modifiers & Effects
+
+**Current:** Lesson 2.3 - GlassCard Component
 
 See `PROGRESS.md` for detailed lesson tracking and concept mastery.
 See `DEVELOPMENT_PLAN.md` for full roadmap.

@@ -714,7 +714,8 @@ Putting it all together in a realistic scenario:
 
                         LoadingIndicator("Adding item...")
                             .padding()
-                            .glassEffect(.regular, in: .rect(cornerRadius: 12))
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
 
                     // Success overlay

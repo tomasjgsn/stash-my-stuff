@@ -77,13 +77,18 @@
 		D925CEFA2EFF22630061B06E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D925CEFB2EFF22630061B06E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D925CEFF2EFF226B0061B06E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D9B758B42F00400000000001 /* Claude */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Claude; sourceTree = "<group>"; };
 		D9F6B6E02EFF6CBC00FA99A4 /* StashItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashItem.swift; sourceTree = "<group>"; };
 		D9F6B6E22EFF742500FA99A4 /* CategoryConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryConfig.swift; sourceTree = "<group>"; };
 		D9F6B6E42EFF797700FA99A4 /* StashRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StashRepository.swift; sourceTree = "<group>"; };
-		D9B758B42F00400000000001 /* Claude */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Claude; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D90903C42F00A6F700CB3DBE /* Modifiers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modifiers; sourceTree = "<group>"; };
+		D90903D12F00C01B00CB3DBE /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		D90903D22F00C01B00CB3DBE /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
+		D90903D32F00C01B00CB3DBE /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
+		D90903D42F00C01B00CB3DBE /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +217,11 @@
 		A1000001001G0007 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				D90903D12F00C01B00CB3DBE /* Components */,
+				D90903C42F00A6F700CB3DBE /* Modifiers */,
+				D90903D22F00C01B00CB3DBE /* Styles */,
+				D90903D32F00C01B00CB3DBE /* Utilities */,
+				D90903D42F00C01B00CB3DBE /* Services */,
 				D90903C22F0032C300CB3DBE /* DesignTokens.swift */,
 			);
 			path = DesignSystem;
@@ -298,6 +308,13 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D90903C42F00A6F700CB3DBE /* Modifiers */,
+				D90903D12F00C01B00CB3DBE /* Components */,
+				D90903D22F00C01B00CB3DBE /* Styles */,
+				D90903D32F00C01B00CB3DBE /* Utilities */,
+				D90903D42F00C01B00CB3DBE /* Services */,
 			);
 			name = StashMyStuff;
 			productName = StashMyStuff;

@@ -151,21 +151,30 @@ Complete data layer with unit tests, capable of CRUD operations and all Smart Vi
   - Radii (card: 20pt, button: 12pt)
   - Shadows (for non-glass elements)
 
-#### 2.2 — Liquid Glass Foundation
-- [ ] Use iOS 26's native `.glassEffect()` modifier where available
-- [ ] Implement `GlassBackground` modifier using Materials (`.ultraThinMaterial`, etc.)
-- [ ] Create `GlassCard` view with proper material blur and corner radius
-- [ ] Build `GlassSheet` for modal presentations
-- [ ] Ensure glass effects respect system appearance and accessibility settings
+#### 2.2 — View Modifiers & Effects ✓
+- [x] Use iOS 26's native `.glassEffect()` modifier
+- [x] Create `GlassCardModifier` and `InteractiveGlassModifier`
+- [x] Build `CategoryAccentModifier` and `CategoryBadgeModifier`
+- [x] Implement conditional modifiers (`.when()`, `.whenElse()`, `.ifLet()`)
+- [x] Create `FavoriteBadgeModifier` with glass effect
+- [x] Build `RotatingGlowModifier` with tonal rainbow animation
+- [x] Add `FlowLayout` custom layout for badge wrapping
+- [x] Ensure all modifiers respect system appearance and accessibility
 
 ```swift
-// Target API using Materials:
+// Native iOS 26 Liquid Glass
 VStack { content }
-    .glassCard()  // Uses .ultraThinMaterial internally
+    .glassCard()                                    // Glass card with padding
+    .glassButton()                                  // Interactive glass for buttons
 
-// Or with native iOS 26 glass:
-VStack { content }
-    .glassEffect()
+// Conditional modifiers
+view.when(condition) { $0.bold() }
+view.whenElse(flag, then: { ... }, else: { ... })
+view.ifLet(optional) { view, value in ... }
+
+// Badge modifiers
+Image("thumbnail").favoriteBadge(isFavorite: true)
+Card().rotatingGlow(isNew, category: .recipe)       // Tonal rainbow animation
 ```
 
 #### 2.3 — Core Components
@@ -534,6 +543,51 @@ A polished, release-ready app with widgets and all platform optimizations.
 ---
 
 ## Development Best Practices
+
+### Liquid Glass Design Guidelines (iOS 26+)
+
+This app uses Apple's Liquid Glass design language. These guidelines are **mandatory** for all UI work.
+
+**Core Principles:**
+
+| Principle | Implementation |
+|-----------|----------------|
+| **Hierarchy** | Glass floats on navigation layer; content sits below |
+| **Content-First** | UI recedes when users are reading/creating/watching |
+| **Interactive Mode** | Always use `.interactive()` for tappable glass elements |
+| **Accessibility** | Maintain contrast; support Dynamic Type; respect Reduce Motion |
+
+**When to Use Glass:**
+- Navigation controls, toolbars, floating buttons
+- Cards that overlay content
+- Interactive controls (buttons, toggles, list rows)
+
+**When NOT to Use Glass:**
+- Main content areas
+- Background fills
+- Every UI element (be selective)
+
+**API Patterns:**
+```swift
+// Static glass card
+.glassEffect(.regular, in: .rect(cornerRadius: 16))
+
+// Interactive (buttons, tappable)
+.glassEffect(.regular.interactive(), in: .capsule)
+
+// Tinted (category colors)
+.glassEffect(.regular.tint(.orange), in: .rect(cornerRadius: 16))
+
+// Morphing animations
+GlassEffectContainer {
+    view.glassEffect(.regular, in: shape)
+         .glassEffectID("id", in: namespace)
+}
+```
+
+**Reference:** See `CLAUDE.md` for full guidelines and source links.
+
+---
 
 ### Code Quality
 - **No force unwraps** — Use proper optional handling

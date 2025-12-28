@@ -18,6 +18,22 @@ Complete **Lessons 2.1 and 2.2** - you'll use DesignTokens and the glass modifie
 
 ---
 
+## Apple's Liquid Glass Guidelines
+
+Before building components, understand Apple's design philosophy:
+
+| Principle | Description |
+|-----------|-------------|
+| **Hierarchy** | Glass floats on the navigation layer; content sits below |
+| **Content-First** | UI elements recede when users are reading/creating |
+| **Interactive Mode** | Use `.interactive()` for tappable elements |
+| **Readability** | Maintain strong text/icon contrast against glass |
+| **Accessibility** | Support Dynamic Type; maintain contrast ratios |
+
+**Key Rule**: Glass is for controls and navigation, not content. Content extends to edges while glass elements float above.
+
+---
+
 ## Part 1: View Components vs Modifiers
 
 ### When to Use Each
@@ -364,19 +380,22 @@ GlassCard.featured {
 
 ## Part 6: Category-Tinted Glass Card
 
-Let's create a variant that adds a subtle category color tint:
+Let's create a variant that adds a subtle category color tint using Apple's official `.tint()` API:
 
 ```swift
 // MARK: - Category Glass Card
 struct CategoryGlassCard<Content: View>: View {
     let category: Category
+    let isInteractive: Bool
     let content: Content
 
     init(
         category: Category,
+        isInteractive: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.category = category
+        self.isInteractive = isInteractive
         self.content = content()
     }
 
@@ -384,30 +403,38 @@ struct CategoryGlassCard<Content: View>: View {
         content
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(DesignTokens.Spacing.lg)
-            .background {
-                // Category color tint behind the glass
-                RoundedRectangle(cornerRadius: DesignTokens.Glass.cardRadius)
-                    .fill(category.color.opacity(0.1))
-            }
-            .glassEffect(.regular, in: .rect(cornerRadius: DesignTokens.Glass.cardRadius))
-            .overlay {
-                // Category-colored border
-                RoundedRectangle(cornerRadius: DesignTokens.Glass.cardRadius)
-                    .stroke(category.color.opacity(0.3), lineWidth: 1)
-            }
+            .glassEffect(
+                // Use Apple's official .tint() API for colored glass
+                isInteractive
+                    ? .regular.tint(category.color).interactive()
+                    : .regular.tint(category.color),
+                in: .rect(cornerRadius: DesignTokens.Glass.cardRadius)
+            )
     }
 }
+```
+
+**What's NEW here:**
+- `.tint(category.color)` is Apple's official API for colored Liquid Glass
+- The glass material adapts automatically - no manual background/overlay needed
+- Adding `.interactive()` makes it respond to taps
+- This approach ensures proper contrast and accessibility
 
 // MARK: - Preview
 #Preview("Category Glass Cards") {
     ZStack {
-        Color(.systemBackground).ignoresSafeArea()
+        LinearGradient(
+            colors: [.blue.opacity(0.2), .purple.opacity(0.2)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
 
         ScrollView {
             VStack(spacing: DesignTokens.Spacing.lg) {
                 ForEach(Category.allCases.prefix(4), id: \.self) { category in
                     if let config = CategoryConfig.config(for: category) {
-                        CategoryGlassCard(category: category) {
+                        CategoryGlassCard(category: category, isInteractive: true) {
                             HStack {
                                 Image(systemName: config.icon)
                                     .font(.title2)
@@ -438,7 +465,37 @@ struct CategoryGlassCard<Content: View>: View {
 
 ---
 
-## Part 7: Complete Preview Suite
+## Part 7: GlassEffectContainer (Preview)
+
+**Advanced Concept**: For morphing animations between glass elements (covered in Lesson 2.8), you'll use `GlassEffectContainer`:
+
+```swift
+// GlassEffectContainer groups glass shapes for morphing
+@Namespace private var glassNamespace
+
+GlassEffectContainer {
+    if isExpanded {
+        ExpandedCard()
+            .glassEffect(.regular, in: .rect(cornerRadius: 20))
+            .glassEffectID("card", in: glassNamespace)
+    } else {
+        CollapsedCard()
+            .glassEffect(.regular, in: .rect(cornerRadius: 12))
+            .glassEffectID("card", in: glassNamespace)
+    }
+}
+```
+
+**Key Points:**
+- Wrap glass elements in `GlassEffectContainer` when they need to morph
+- Use `.glassEffectID(_:in:)` with a `@Namespace` for tracking
+- SwiftUI automatically animates shape transitions
+
+We'll implement this fully in **Lesson 2.8: Animations and Haptics**.
+
+---
+
+## Part 8: Complete Preview Suite
 
 Add a comprehensive preview at the end of the file:
 
@@ -621,6 +678,9 @@ A complete `GlassCard` component system in `DesignSystem/Components/GlassCard.sw
 | `where` clauses | Constrain generics in specific initializers |
 | EmptyView | SwiftUI's "nothing" placeholder |
 | Preset methods | Static methods for common configurations |
+| `.tint()` API | Official way to add color to Liquid Glass |
+| `.interactive()` | Makes glass respond to touch states |
+| GlassEffectContainer | Groups glass shapes for morphing (preview) |
 
 ---
 
@@ -633,7 +693,8 @@ StashMyStuff/
     ├── Modifiers/
     │   ├── GlassModifier.swift      (Lesson 2.2)
     │   ├── CategoryModifier.swift   (Lesson 2.2)
-    │   └── ConditionalModifiers.swift (Lesson 2.2)
+    │   ├── ConditionalModifiers.swift (Lesson 2.2)
+    │   └── BadgeModifiers.swift     (Lesson 2.2)
     └── Components/
         └── GlassCard.swift          (This lesson)
 ```

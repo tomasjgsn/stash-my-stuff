@@ -21,7 +21,7 @@ SF Symbols are vector icons designed by Apple that:
 - Match the San Francisco font weight
 - Support multiple rendering modes
 - Work across all Apple platforms
-
+ 
 **MATLAB/Python analogy**: Think of them like matplotlib's built-in markers (`'o'`, `'s'`, `'^'`), but with thousands of options and much more flexibility.
 
 ### Basic Usage

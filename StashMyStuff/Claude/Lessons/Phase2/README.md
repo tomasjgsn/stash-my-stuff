@@ -193,6 +193,13 @@ DesignTokens.Shadows.md                  // For non-glass elements
 view.glassEffect()
 view.glassEffect(.regular, in: .rect(cornerRadius: 16))
 view.glassEffect(.regular.interactive(), in: .capsule)  // For buttons
+view.glassEffect(.regular.tint(.orange), in: .rect(cornerRadius: 16))  // Tinted glass
+
+// Morphing glass shapes
+GlassEffectContainer {
+    view.glassEffect(.regular, in: shape)
+         .glassEffectID("id", in: namespace)
+}
 ```
 
 ### Modifiers
@@ -202,13 +209,18 @@ view.glassEffect(.regular.interactive(), in: .capsule)  // For buttons
 .glassButton()                           // Interactive glass for buttons
 .categoryAccent(.recipe)
 .categoryBadge(.book)
-.if(condition) { view in view.modifier() }
+.when(condition) { view in view.modifier() }
+.whenElse(cond, then: { }, else: { })
+.ifLet(optional) { view, value in ... }
+.favoriteBadge(isFavorite: true)         // Heart overlay badge
+.rotatingGlow(isNew, category: .recipe)  // Tonal rainbow glow
 ```
 
 ### Components
 ```swift
 GlassCard { content }
 GlassCard(isInteractive: true) { content }  // For tappable cards
+CategoryGlassCard(category: .recipe) { content }  // Tinted glass with category color
 CategoryIcon(.recipe, size: .large, style: .filled)
 FlagButton(flag: definition, isActive: $isActive)
 TagChip("vegetarian", onRemove: { })

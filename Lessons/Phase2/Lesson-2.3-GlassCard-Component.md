@@ -18,6 +18,22 @@ Complete **Lessons 2.1 and 2.2** - you'll use DesignTokens and the glass modifie
 
 ---
 
+## Apple's Liquid Glass Guidelines
+
+Before building components, understand Apple's design philosophy:
+
+| Principle | Description |
+|-----------|-------------|
+| **Hierarchy** | Glass floats on the navigation layer; content sits below |
+| **Content-First** | UI elements recede when users are reading/creating |
+| **Interactive Mode** | Use `.interactive()` for tappable elements |
+| **Readability** | Maintain strong text/icon contrast against glass |
+| **Accessibility** | Support Dynamic Type; maintain contrast ratios |
+
+**Key Rule**: Glass is for controls and navigation, not content. Content extends to edges while glass elements float above.
+
+---
+
 ## Part 1: View Components vs Modifiers
 
 ### When to Use Each
@@ -69,7 +85,7 @@ Create the component file:
 
 import SwiftUI
 
-/// A glass-morphism card container for content
+/// A Liquid Glass card container using iOS 26's native .glassEffect()
 struct GlassCard<Content: View>: View {
     let content: Content
 
@@ -97,7 +113,7 @@ struct GlassCard<Content: View>: View {
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                 Text("My Glass Card")
                     .font(DesignTokens.Typography.headline)
-                Text("This content is wrapped in a glass effect.")
+                Text("This content is wrapped in native Liquid Glass.")
                     .font(DesignTokens.Typography.body)
                     .foregroundStyle(.secondary)
             }
@@ -112,7 +128,7 @@ struct GlassCard<Content: View>: View {
 - `GlassCard<Content: View>` is a generic type - `Content` can be ANY view type
 - `@ViewBuilder content: () -> Content` accepts a closure that builds views
 - `content()` executes the closure and stores the result
-- The body applies our glass modifier to whatever content was passed
+- The body applies our `.glassCard()` modifier which uses `.glassEffect()`
 
 ### Why `() -> Content` instead of just `Content`?
 
@@ -136,27 +152,30 @@ GlassCard(content: VStack {
 
 ## Part 3: Adding Customization Options
 
-Let's add parameters for corner radius and shadow level:
+Let's add parameters for corner radius and interactive mode:
 
 ```swift
 struct GlassCard<Content: View>: View {
     let cornerRadius: CGFloat
-    let shadow: Shadow
+    let isInteractive: Bool
     let content: Content
 
     init(
-        cornerRadius: CGFloat = DesignTokens.Radius.xl,
-        shadow: Shadow = DesignTokens.Shadows.md,
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius,
+        isInteractive: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.cornerRadius = cornerRadius
-        self.shadow = shadow
+        self.isInteractive = isInteractive
         self.content = content()
     }
 
     var body: some View {
         content
-            .glassCard(cornerRadius: cornerRadius, shadow: shadow)
+            .glassEffect(
+                isInteractive ? .regular.interactive() : .regular,
+                in: .rect(cornerRadius: cornerRadius)
+            )
     }
 }
 ```
@@ -164,14 +183,14 @@ struct GlassCard<Content: View>: View {
 Now you can customize:
 
 ```swift
-// Default
+// Default glass card
 GlassCard { content }
 
 // Custom corner radius
 GlassCard(cornerRadius: DesignTokens.Radius.sm) { content }
 
-// No shadow (flat)
-GlassCard(shadow: Shadow(color: .clear, radius: 0, x: 0, y: 0)) { content }
+// Interactive (for tappable cards)
+GlassCard(isInteractive: true) { content }  // Responds to press states
 ```
 
 ---
@@ -188,19 +207,19 @@ For more complex cards, let's add optional header and footer sections:
 
 import SwiftUI
 
-/// A glass-morphism card container with optional header and footer
+/// A Liquid Glass card container with optional header and footer
 struct GlassCard<Header: View, Content: View, Footer: View>: View {
     let header: Header?
     let content: Content
     let footer: Footer?
     let cornerRadius: CGFloat
-    let shadow: Shadow
+    let isInteractive: Bool
     let spacing: CGFloat
 
     /// Initialize with content only
     init(
-        cornerRadius: CGFloat = DesignTokens.Radius.xl,
-        shadow: Shadow = DesignTokens.Shadows.md,
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius,
+        isInteractive: Bool = false,
         spacing: CGFloat = DesignTokens.Spacing.md,
         @ViewBuilder content: () -> Content
     ) where Header == EmptyView, Footer == EmptyView {
@@ -208,14 +227,14 @@ struct GlassCard<Header: View, Content: View, Footer: View>: View {
         self.content = content()
         self.footer = nil
         self.cornerRadius = cornerRadius
-        self.shadow = shadow
+        self.isInteractive = isInteractive
         self.spacing = spacing
     }
 
     /// Initialize with header and content
     init(
-        cornerRadius: CGFloat = DesignTokens.Radius.xl,
-        shadow: Shadow = DesignTokens.Shadows.md,
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius,
+        isInteractive: Bool = false,
         spacing: CGFloat = DesignTokens.Spacing.md,
         @ViewBuilder header: () -> Header,
         @ViewBuilder content: () -> Content
@@ -224,14 +243,14 @@ struct GlassCard<Header: View, Content: View, Footer: View>: View {
         self.content = content()
         self.footer = nil
         self.cornerRadius = cornerRadius
-        self.shadow = shadow
+        self.isInteractive = isInteractive
         self.spacing = spacing
     }
 
     /// Initialize with header, content, and footer
     init(
-        cornerRadius: CGFloat = DesignTokens.Radius.xl,
-        shadow: Shadow = DesignTokens.Shadows.md,
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius,
+        isInteractive: Bool = false,
         spacing: CGFloat = DesignTokens.Spacing.md,
         @ViewBuilder header: () -> Header,
         @ViewBuilder content: () -> Content,
@@ -241,7 +260,7 @@ struct GlassCard<Header: View, Content: View, Footer: View>: View {
         self.content = content()
         self.footer = footer()
         self.cornerRadius = cornerRadius
-        self.shadow = shadow
+        self.isInteractive = isInteractive
         self.spacing = spacing
     }
 
@@ -258,7 +277,11 @@ struct GlassCard<Header: View, Content: View, Footer: View>: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .glassCard(cornerRadius: cornerRadius, shadow: shadow)
+        .padding(DesignTokens.Spacing.lg)
+        .glassEffect(
+            isInteractive ? .regular.interactive() : .regular,
+            in: .rect(cornerRadius: cornerRadius)
+        )
     }
 }
 ```
@@ -316,13 +339,13 @@ Let's create some convenient preset styles for common use cases:
 ```swift
 // MARK: - Preset Styles
 extension GlassCard where Header == EmptyView, Footer == EmptyView {
-    /// A card optimized for list items
+    /// A card optimized for list items (smaller corners)
     static func listItem(
         @ViewBuilder content: () -> Content
     ) -> GlassCard {
         GlassCard(
-            cornerRadius: DesignTokens.Radius.lg,
-            shadow: DesignTokens.Shadows.sm,
+            cornerRadius: DesignTokens.Glass.chipRadius,
+            isInteractive: true,  // List items are usually tappable
             spacing: DesignTokens.Spacing.sm,
             content: content
         )
@@ -334,7 +357,7 @@ extension GlassCard where Header == EmptyView, Footer == EmptyView {
     ) -> GlassCard {
         GlassCard(
             cornerRadius: DesignTokens.Radius.xl,
-            shadow: DesignTokens.Shadows.lg,
+            isInteractive: false,
             spacing: DesignTokens.Spacing.lg,
             content: content
         )
@@ -357,19 +380,22 @@ GlassCard.featured {
 
 ## Part 6: Category-Tinted Glass Card
 
-Let's create a variant that adds a subtle category color tint:
+Let's create a variant that adds a subtle category color tint using Apple's official `.tint()` API:
 
 ```swift
 // MARK: - Category Glass Card
 struct CategoryGlassCard<Content: View>: View {
     let category: Category
+    let isInteractive: Bool
     let content: Content
 
     init(
         category: Category,
+        isInteractive: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.category = category
+        self.isInteractive = isInteractive
         self.content = content()
     }
 
@@ -377,33 +403,38 @@ struct CategoryGlassCard<Content: View>: View {
         content
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(DesignTokens.Spacing.lg)
-            .background {
-                RoundedRectangle(cornerRadius: DesignTokens.Radius.xl)
-                    .fill(.ultraThinMaterial)
-                    .overlay {
-                        // Subtle category color tint
-                        RoundedRectangle(cornerRadius: DesignTokens.Radius.xl)
-                            .fill(category.color.opacity(0.1))
-                    }
-                    .overlay {
-                        RoundedRectangle(cornerRadius: DesignTokens.Radius.xl)
-                            .stroke(category.color.opacity(0.3), lineWidth: 1)
-                    }
-            }
-            .shadow(DesignTokens.Shadows.md)
+            .glassEffect(
+                // Use Apple's official .tint() API for colored glass
+                isInteractive
+                    ? .regular.tint(category.color).interactive()
+                    : .regular.tint(category.color),
+                in: .rect(cornerRadius: DesignTokens.Glass.cardRadius)
+            )
     }
 }
+```
+
+**What's NEW here:**
+- `.tint(category.color)` is Apple's official API for colored Liquid Glass
+- The glass material adapts automatically - no manual background/overlay needed
+- Adding `.interactive()` makes it respond to taps
+- This approach ensures proper contrast and accessibility
 
 // MARK: - Preview
 #Preview("Category Glass Cards") {
     ZStack {
-        Color(.systemBackground).ignoresSafeArea()
+        LinearGradient(
+            colors: [.blue.opacity(0.2), .purple.opacity(0.2)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
 
         ScrollView {
             VStack(spacing: DesignTokens.Spacing.lg) {
                 ForEach(Category.allCases.prefix(4), id: \.self) { category in
                     if let config = CategoryConfig.config(for: category) {
-                        CategoryGlassCard(category: category) {
+                        CategoryGlassCard(category: category, isInteractive: true) {
                             HStack {
                                 Image(systemName: config.icon)
                                     .font(.title2)
@@ -434,7 +465,37 @@ struct CategoryGlassCard<Content: View>: View {
 
 ---
 
-## Part 7: Complete Preview Suite
+## Part 7: GlassEffectContainer (Preview)
+
+**Advanced Concept**: For morphing animations between glass elements (covered in Lesson 2.8), you'll use `GlassEffectContainer`:
+
+```swift
+// GlassEffectContainer groups glass shapes for morphing
+@Namespace private var glassNamespace
+
+GlassEffectContainer {
+    if isExpanded {
+        ExpandedCard()
+            .glassEffect(.regular, in: .rect(cornerRadius: 20))
+            .glassEffectID("card", in: glassNamespace)
+    } else {
+        CollapsedCard()
+            .glassEffect(.regular, in: .rect(cornerRadius: 12))
+            .glassEffectID("card", in: glassNamespace)
+    }
+}
+```
+
+**Key Points:**
+- Wrap glass elements in `GlassEffectContainer` when they need to morph
+- Use `.glassEffectID(_:in:)` with a `@Namespace` for tracking
+- SwiftUI automatically animates shape transitions
+
+We'll implement this fully in **Lesson 2.8: Animations and Haptics**.
+
+---
+
+## Part 8: Complete Preview Suite
 
 Add a comprehensive preview at the end of the file:
 
@@ -617,6 +678,9 @@ A complete `GlassCard` component system in `DesignSystem/Components/GlassCard.sw
 | `where` clauses | Constrain generics in specific initializers |
 | EmptyView | SwiftUI's "nothing" placeholder |
 | Preset methods | Static methods for common configurations |
+| `.tint()` API | Official way to add color to Liquid Glass |
+| `.interactive()` | Makes glass respond to touch states |
+| GlassEffectContainer | Groups glass shapes for morphing (preview) |
 
 ---
 
@@ -629,7 +693,8 @@ StashMyStuff/
     ├── Modifiers/
     │   ├── GlassModifier.swift      (Lesson 2.2)
     │   ├── CategoryModifier.swift   (Lesson 2.2)
-    │   └── ConditionalModifiers.swift (Lesson 2.2)
+    │   ├── ConditionalModifiers.swift (Lesson 2.2)
+    │   └── BadgeModifiers.swift     (Lesson 2.2)
     └── Components/
         └── GlassCard.swift          (This lesson)
 ```

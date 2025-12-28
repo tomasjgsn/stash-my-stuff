@@ -145,22 +145,36 @@ Complete data layer with unit tests, capable of CRUD operations and all Smart Vi
 #### 2.1 — Design Tokens
 - [ ] Create `DesignTokens` enum/struct with all values:
   - Colors (category accents, semantic colors)
+  - Glass (Material types for glass effects)
   - Typography (SF Pro Rounded scales)
   - Spacing (consistent 4pt grid)
   - Radii (card: 20pt, button: 12pt)
-  - Shadows (elevation levels)
+  - Shadows (for non-glass elements)
 
-#### 2.2 — Liquid Glass Foundation
-- [ ] Implement `GlassBackground` modifier
-- [ ] Create `GlassCard` view with proper blur, border, shadow
-- [ ] Build `GlassSheet` for modal presentations
-- [ ] Implement glass effect that respects system appearance (light/dark)
+#### 2.2 — View Modifiers & Effects ✓
+- [x] Use iOS 26's native `.glassEffect()` modifier
+- [x] Create `GlassCardModifier` and `InteractiveGlassModifier`
+- [x] Build `CategoryAccentModifier` and `CategoryBadgeModifier`
+- [x] Implement conditional modifiers (`.when()`, `.whenElse()`, `.ifLet()`)
+- [x] Create `FavoriteBadgeModifier` with glass effect
+- [x] Build `RotatingGlowModifier` with tonal rainbow animation
+- [x] Add `FlowLayout` custom layout for badge wrapping
+- [x] Ensure all modifiers respect system appearance and accessibility
 
 ```swift
-// Target API:
+// Native iOS 26 Liquid Glass
 VStack { content }
-    .glassCard()
-    .shadow(.elevation2)
+    .glassCard()                                    // Glass card with padding
+    .glassButton()                                  // Interactive glass for buttons
+
+// Conditional modifiers
+view.when(condition) { $0.bold() }
+view.whenElse(flag, then: { ... }, else: { ... })
+view.ifLet(optional) { view, value in ... }
+
+// Badge modifiers
+Image("thumbnail").favoriteBadge(isFavorite: true)
+Card().rotatingGlow(isNew, category: .recipe)       // Tonal rainbow animation
 ```
 
 #### 2.3 — Core Components
@@ -530,6 +544,51 @@ A polished, release-ready app with widgets and all platform optimizations.
 
 ## Development Best Practices
 
+### Liquid Glass Design Guidelines (iOS 26+)
+
+This app uses Apple's Liquid Glass design language. These guidelines are **mandatory** for all UI work.
+
+**Core Principles:**
+
+| Principle | Implementation |
+|-----------|----------------|
+| **Hierarchy** | Glass floats on navigation layer; content sits below |
+| **Content-First** | UI recedes when users are reading/creating/watching |
+| **Interactive Mode** | Always use `.interactive()` for tappable glass elements |
+| **Accessibility** | Maintain contrast; support Dynamic Type; respect Reduce Motion |
+
+**When to Use Glass:**
+- Navigation controls, toolbars, floating buttons
+- Cards that overlay content
+- Interactive controls (buttons, toggles, list rows)
+
+**When NOT to Use Glass:**
+- Main content areas
+- Background fills
+- Every UI element (be selective)
+
+**API Patterns:**
+```swift
+// Static glass card
+.glassEffect(.regular, in: .rect(cornerRadius: 16))
+
+// Interactive (buttons, tappable)
+.glassEffect(.regular.interactive(), in: .capsule)
+
+// Tinted (category colors)
+.glassEffect(.regular.tint(.orange), in: .rect(cornerRadius: 16))
+
+// Morphing animations
+GlassEffectContainer {
+    view.glassEffect(.regular, in: shape)
+         .glassEffectID("id", in: namespace)
+}
+```
+
+**Reference:** See `CLAUDE.md` for full guidelines and source links.
+
+---
+
 ### Code Quality
 - **No force unwraps** — Use proper optional handling
 - **No stringly-typed code** — Use enums for categories, flags, etc.
@@ -576,7 +635,7 @@ main (production)
 | Share Extension memory limits | Minimal UI, async metadata fetch, timeout handling |
 | iOS 26/macOS 26 beta issues | Test on each beta release, file radars early |
 | Category auto-detection accuracy | Start with domain matching, add ML later if needed |
-| Liquid Glass performance | Profile early, use `.drawingGroup()` if needed |
+| Liquid Glass performance | Use native `.glassEffect()` and Materials which are GPU-optimized; profile early if issues arise |
 
 ---
 

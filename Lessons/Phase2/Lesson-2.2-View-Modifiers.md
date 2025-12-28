@@ -80,13 +80,37 @@ Text("Hello").redBorder()
 
 ---
 
-## Part 2: Building the Glass Effect Modifier
+## Part 2: iOS 26 Liquid Glass
 
-Let's create the signature "Liquid Glass" effect for our app.
+iOS 26 introduced the **Liquid Glass** design language. SwiftUI provides the `.glassEffect()` modifier for native glass with refraction, depth, and dynamic lighting.
 
-### Create the File
+### The `.glassEffect()` API
 
-Create a new folder and file:
+```swift
+// Basic signature
+.glassEffect(_ style: GlassEffectStyle, in shape: some Shape)
+
+// Common usage patterns
+VStack { content }
+    .glassEffect()                                      // Default glass
+
+VStack { content }
+    .glassEffect(.regular, in: .rect(cornerRadius: 16)) // Glass card
+
+Button("Tap") { }
+    .glassEffect(.regular.interactive(), in: .capsule)  // Glass button
+```
+
+**Key benefits:**
+1. **True glass** — Refraction, depth, and dynamic lighting (not just blur)
+2. **Automatic shadows** — System handles depth and elevation
+3. **Press states** — `.interactive()` responds to touches automatically
+4. **Performance** — GPU-accelerated, optimized by Apple
+5. **Accessibility** — Respects Reduce Transparency settings automatically
+
+### Create the Glass Modifier File
+
+We create convenience modifiers that wrap `.glassEffect()` with our design tokens:
 
 **File**: `StashMyStuff/DesignSystem/Modifiers/GlassModifier.swift`
 
@@ -98,41 +122,50 @@ Create a new folder and file:
 
 import SwiftUI
 
-// MARK: - Glass Background Modifier
-struct GlassBackgroundModifier: ViewModifier {
+// MARK: - Glass Card Modifier
+struct GlassCardModifier: ViewModifier {
     let cornerRadius: CGFloat
 
     func body(content: Content) -> some View {
         content
-            .background {
-                // Glass effect: blur + fill + border
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(.ultraThinMaterial)  // System blur material
-                    .overlay {
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(
-                                DesignTokens.Colors.glassBorder,
-                                lineWidth: 1
-                            )
-                    }
-            }
+            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
+    }
+}
+
+// MARK: - Interactive Glass Modifier (for buttons)
+struct InteractiveGlassModifier: ViewModifier {
+    let cornerRadius: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .glassEffect(.regular.interactive(), in: .rect(cornerRadius: cornerRadius))
     }
 }
 
 // MARK: - View Extension
 extension View {
-    /// Applies a glass morphism background effect
-    /// - Parameter cornerRadius: The corner radius (default: lg = 16pt)
-    func glassBackground(cornerRadius: CGFloat = DesignTokens.Radius.lg) -> some View {
-        self.modifier(GlassBackgroundModifier(cornerRadius: cornerRadius))
+    /// Applies a glass card effect
+    /// - Parameter cornerRadius: The corner radius (default: cardRadius = 16pt)
+    func glassCard(
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius
+    ) -> some View {
+        self.modifier(GlassCardModifier(cornerRadius: cornerRadius))
+    }
+
+    /// Applies an interactive glass effect (for buttons, tappable elements)
+    /// - Parameter cornerRadius: The corner radius (default: buttonRadius = 12pt)
+    func glassButton(
+        cornerRadius: CGFloat = DesignTokens.Glass.buttonRadius
+    ) -> some View {
+        self.modifier(InteractiveGlassModifier(cornerRadius: cornerRadius))
     }
 }
 ```
 
 **What's happening:**
-- `.ultraThinMaterial` is Apple's built-in blur effect that adapts to light/dark mode
-- The `overlay` adds a subtle border for definition
-- We parameterize `cornerRadius` so it's flexible
+- `.glassEffect(.regular, ...)` provides the native Liquid Glass look
+- `.interactive()` adds press-state feedback for buttons
+- Our modifiers wrap the API with semantic naming and default tokens
 
 ### Test the Glass Effect
 
@@ -140,9 +173,9 @@ Add a preview at the bottom:
 
 ```swift
 // MARK: - Preview
-#Preview("Glass Background") {
+#Preview("Liquid Glass") {
     ZStack {
-        // Colorful background to show the blur effect
+        // Colorful background to show the glass effect
         LinearGradient(
             colors: [.purple, .blue, .cyan],
             startPoint: .topLeading,
@@ -155,21 +188,25 @@ Add a preview at the bottom:
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                 Text("Glass Card")
                     .font(DesignTokens.Typography.headline)
-                Text("This is content inside a glass card. Notice how the background shows through with a blur effect.")
+                Text("This is content inside a glass card with true Liquid Glass effect.")
                     .font(DesignTokens.Typography.body)
                     .foregroundStyle(.secondary)
             }
             .padding(DesignTokens.Spacing.lg)
-            .glassBackground()
+            .glassCard()
 
-            // Another card
-            HStack {
-                Image(systemName: "star.fill")
-                    .foregroundStyle(.yellow)
-                Text("Featured Item")
+            // Interactive glass button
+            Button {
+                print("Tapped!")
+            } label: {
+                HStack {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(.yellow)
+                    Text("Featured Item")
+                }
+                .padding(DesignTokens.Spacing.md)
             }
-            .padding(DesignTokens.Spacing.md)
-            .glassBackground(cornerRadius: DesignTokens.Radius.xl)
+            .glassButton()
         }
         .padding()
     }
@@ -178,54 +215,38 @@ Add a preview at the bottom:
 
 ---
 
-## Part 3: Glass Card Modifier with Shadow
+## Part 3: Glass Card with Padding
 
-A complete glass card needs padding, background, AND shadow. Let's create a compound modifier:
-
-Add to the same file:
+A complete glass card combines padding with the glass effect. Update the modifier:
 
 ```swift
-// MARK: - Glass Card Modifier
+// MARK: - Glass Card Modifier (with padding)
 struct GlassCardModifier: ViewModifier {
     let cornerRadius: CGFloat
     let padding: CGFloat
-    let shadow: Shadow
 
     func body(content: Content) -> some View {
         content
             .padding(padding)
-            .background {
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(.ultraThinMaterial)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(DesignTokens.Colors.glassBorder, lineWidth: 1)
-                    }
-                    .shadow(
-                        color: shadow.color,
-                        radius: shadow.radius,
-                        x: shadow.x,
-                        y: shadow.y
-                    )
-            }
+            .glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
     }
 }
 
 extension View {
-    /// Applies a complete glass card style with padding and shadow
+    /// Applies a complete glass card style with padding
     func glassCard(
-        cornerRadius: CGFloat = DesignTokens.Radius.xl,
-        padding: CGFloat = DesignTokens.Spacing.lg,
-        shadow: Shadow = DesignTokens.Shadows.md
+        cornerRadius: CGFloat = DesignTokens.Glass.cardRadius,
+        padding: CGFloat = DesignTokens.Spacing.lg
     ) -> some View {
         self.modifier(GlassCardModifier(
             cornerRadius: cornerRadius,
-            padding: padding,
-            shadow: shadow
+            padding: padding
         ))
     }
 }
 ```
+
+**Note:** `.glassEffect()` automatically adapts to light/dark mode and respects accessibility settings like Reduce Transparency.
 
 Now you can apply a complete card style with one modifier:
 
@@ -234,7 +255,7 @@ VStack {
     Text("Title")
     Text("Description")
 }
-.glassCard()  // Adds padding, background, border, and shadow!
+.glassCard()  // Adds padding and native Liquid Glass!
 ```
 
 ---
@@ -333,7 +354,7 @@ Text("Hello")
     .foregroundStyle(isSelected ? .blue : .gray)
 ```
 
-### Pattern 2: Custom Conditional Modifier
+### Pattern 2: Custom Conditional Modifiers
 
 Add this to a new utilities file:
 
@@ -349,8 +370,9 @@ import SwiftUI
 
 extension View {
     /// Applies a modifier only when a condition is true
+    /// Usage: Text("Hello").when(isHighlighted) { $0.bold() }
     @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+    func when<Content: View>(_ condition: Bool, apply transform: (Self) -> Content) -> some View {
         if condition {
             transform(self)
         } else {
@@ -359,40 +381,22 @@ extension View {
     }
 
     /// Applies one modifier when true, another when false
+    /// Usage: Text("Status").whenElse(isActive, then: { $0.foregroundStyle(.green) }, else: { $0.foregroundStyle(.gray) })
     @ViewBuilder
-    func `if`<TrueContent: View, FalseContent: View>(
+    func whenElse<TrueContent: View, FalseContent: View>(
         _ condition: Bool,
-        if ifTransform: (Self) -> TrueContent,
-        else elseTransform: (Self) -> FalseContent
+        then trueTransform: (Self) -> TrueContent,
+        else falseTransform: (Self) -> FalseContent
     ) -> some View {
         if condition {
-            ifTransform(self)
+            trueTransform(self)
         } else {
-            elseTransform(self)
+            falseTransform(self)
         }
     }
-}
-```
 
-**What's NEW here:**
-- `@ViewBuilder` allows the function to return different view types from if/else
-- Backticks around `if` let us use a keyword as a function name
-- This enables clean conditional styling:
-
-```swift
-Text("Item")
-    .if(isHighlighted) { view in
-        view
-            .background(.yellow)
-            .fontWeight(.bold)
-    }
-```
-
-### Pattern 3: Optional-Based Modifier
-
-```swift
-extension View {
     /// Applies a modifier if the optional has a value
+    /// Usage: Text("Item").ifLet(item.imageURL) { view, url in view.overlay(AsyncImage(url: url)) }
     @ViewBuilder
     func ifLet<T, Content: View>(_ optional: T?, transform: (Self, T) -> Content) -> some View {
         if let value = optional {
@@ -402,8 +406,30 @@ extension View {
         }
     }
 }
+```
 
-// Usage
+**What's NEW here:**
+- `@ViewBuilder` allows the function to return different view types from if/else
+- We use `when` instead of `if` to avoid Swift keyword conflicts and overload issues
+- This enables clean conditional styling:
+
+```swift
+// Apply modifier only when condition is true
+Text("Item")
+    .when(isHighlighted) { view in
+        view
+            .background(.yellow)
+            .fontWeight(.bold)
+    }
+
+// Different modifiers for true/false
+Text("Status")
+    .whenElse(isActive,
+        then: { $0.foregroundStyle(.green) },
+        else: { $0.foregroundStyle(.gray) }
+    )
+
+// Apply modifier only if optional has a value
 Text("Item")
     .ifLet(item.imageURL) { view, url in
         view.overlay(AsyncImage(url: url))
@@ -412,16 +438,17 @@ Text("Item")
 
 ---
 
-## Part 6: Shadow Modifier Helper
+## Part 6: Shadow Modifier Helper (For Non-Glass Elements)
 
-Let's create a nicer API for our shadow tokens:
+While iOS 26's `.glassEffect()` handles shadows automatically for glass elements, you'll still need manual shadows for non-glass views (images, solid backgrounds, etc.).
 
 Add to `GlassModifier.swift`:
 
 ```swift
 // MARK: - Shadow Modifier
 extension View {
-    /// Applies a design token shadow
+    /// Applies a design token shadow (for non-glass elements)
+    /// Note: Glass elements don't need this - .glassEffect() handles depth automatically
     func shadow(_ shadow: Shadow) -> some View {
         self.shadow(
             color: shadow.color,
@@ -433,21 +460,16 @@ extension View {
 }
 ```
 
-Now you can write:
+Use this for non-glass elements:
 ```swift
-Card()
+// Non-glass image card - needs manual shadow
+Image("photo")
+    .clipShape(RoundedRectangle(cornerRadius: 12))
     .shadow(DesignTokens.Shadows.md)
-```
 
-Instead of:
-```swift
-Card()
-    .shadow(
-        color: DesignTokens.Shadows.md.color,
-        radius: DesignTokens.Shadows.md.radius,
-        x: DesignTokens.Shadows.md.x,
-        y: DesignTokens.Shadows.md.y
-    )
+// Glass card - shadow handled automatically
+VStack { content }
+    .glassCard()  // No need for .shadow() - Liquid Glass handles it
 ```
 
 ---
@@ -563,6 +585,8 @@ struct FlowLayout: Layout {
 
 ## Exercise: Your Turn
 
+These exercises are implemented in a new file: `StashMyStuff/DesignSystem/Modifiers/BadgeModifiers.swift`
+
 ### Exercise 1: Create a Favorite Badge Modifier
 
 Create a modifier that adds a small heart icon overlay to any view when an item is favorited:
@@ -577,6 +601,7 @@ Image("thumbnail")
 <summary>Solution</summary>
 
 ```swift
+/// Adds a heart icon overlay to indicate favorited items
 struct FavoriteBadgeModifier: ViewModifier {
     let isFavorite: Bool
 
@@ -587,10 +612,9 @@ struct FavoriteBadgeModifier: ViewModifier {
                     Image(systemName: "heart.fill")
                         .font(DesignTokens.Typography.caption)
                         .foregroundStyle(.red)
-                        .padding(DesignTokens.Spacing.xxs)
-                        .background(.white.opacity(0.9))
-                        .clipShape(Circle())
-                        .offset(x: 4, y: -4)
+                        .padding(DesignTokens.Spacing.xs)
+                        .glassEffect(.regular, in: .circle)  // Use Liquid Glass!
+                        .offset(x: 8, y: -8)
                 }
             }
     }
@@ -598,21 +622,111 @@ struct FavoriteBadgeModifier: ViewModifier {
 
 extension View {
     func favoriteBadge(isFavorite: Bool) -> some View {
-        self.modifier(FavoriteBadgeModifier(isFavorite: isFavorite))
+        modifier(FavoriteBadgeModifier(isFavorite: isFavorite))
     }
 }
 ```
 
+**Note:** We use `.glassEffect(.regular, in: .circle)` instead of `.background(.white).clipShape(Circle())` because:
+1. It adapts to dark mode automatically
+2. It matches the app's Liquid Glass design
+3. One modifier replaces two
+
 </details>
 
-### Exercise 2: Create a Highlight Modifier
+### Exercise 2: Create a Rotating Glow Modifier
 
-Create a modifier that adds a pulsing glow effect for "new" items:
+Create a modifier that adds a rotating tonal rainbow glow effect (Apple Intelligence style) using the category's color:
+
+```swift
+// Target usage:
+StashItemCard(item: item)
+    .rotatingGlow(isNew, category: item.category, cornerRadius: 12)
+```
 
 <details>
-<summary>Hint</summary>
+<summary>Solution</summary>
 
-Use `.shadow()` with a larger radius and animate it with `@State` and `.animation()`.
+```swift
+/// Adds a rotating tonal rainbow glow effect based on a single color
+struct RotatingGlowModifier: ViewModifier {
+    let isActive: Bool
+    let color: Color
+    let cornerRadius: CGFloat
+
+    @State private var rotation: Double = 0
+
+    // Creates a tonal rainbow by shifting hue around the base color
+    private var tonalGradientColors: [Color] {
+        let uiColor = UIColor(color)
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        uiColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+
+        return [
+            Color(hue: hue - 0.08, saturation: saturation * 0.8, brightness: brightness),
+            Color(hue: hue - 0.04, saturation: saturation, brightness: brightness * 1.1),
+            color,
+            Color(hue: hue + 0.04, saturation: saturation, brightness: brightness * 1.1),
+            Color(hue: hue + 0.08, saturation: saturation * 0.8, brightness: brightness),
+            Color(hue: hue - 0.08, saturation: saturation * 0.8, brightness: brightness)
+        ]
+    }
+
+    private var tonalGradient: AngularGradient {
+        AngularGradient(colors: tonalGradientColors, center: .center, angle: .degrees(rotation))
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .background {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 8)
+                        .blur(radius: 16)
+                        .opacity(0.7)
+                }
+            }
+            .overlay {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 4)
+                        .blur(radius: 3)
+                }
+            }
+            .overlay {
+                if isActive {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(tonalGradient, lineWidth: 2)
+                }
+            }
+            .onAppear {
+                guard isActive else { return }
+                withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
+                    rotation = 360
+                }
+            }
+    }
+}
+
+extension View {
+    func rotatingGlow(_ isActive: Bool, color: Color, cornerRadius: CGFloat = DesignTokens.Radius.md) -> some View {
+        modifier(RotatingGlowModifier(isActive: isActive, color: color, cornerRadius: cornerRadius))
+    }
+
+    func rotatingGlow(_ isActive: Bool, category: Category, cornerRadius: CGFloat = DesignTokens.Radius.md) -> some View {
+        modifier(RotatingGlowModifier(isActive: isActive, color: category.color, cornerRadius: cornerRadius))
+    }
+}
+```
+
+**Key concepts:**
+- Uses `AngularGradient` that rotates continuously
+- Creates a "tonal rainbow" by shifting hue ±8% around the base color
+- Three layers: outer glow (blurred), mid glow, and sharp border
+- Animation runs forever without reversing
 
 </details>
 
@@ -623,17 +737,24 @@ Use `.shadow()` with a larger radius and animate it with `@State` and `.animatio
 You now have a set of reusable modifiers in `DesignSystem/Modifiers/`:
 
 1. **GlassModifier.swift**
-   - `.glassBackground()` - Just the blur effect
-   - `.glassCard()` - Complete card with padding and shadow
-   - `.shadow(Shadow)` - Apply token-based shadows
+   - `.glassCard()` - Native Liquid Glass card with padding
+   - `.glassButton()` - Interactive glass for tappable elements
+   - `.shadow(Shadow)` - Token-based shadows (for non-glass elements)
+   - `FlowLayout` - Custom layout for wrapping badges
 
 2. **CategoryModifier.swift**
    - `.categoryAccent()` - Tint with category color
    - `.categoryBadge()` - Styled pill badge
 
 3. **ConditionalModifiers.swift**
-   - `.if(condition)` - Conditional modifier application
+   - `.when(condition)` - Conditional modifier application
+   - `.whenElse(condition, then:, else:)` - Different modifiers for each case
    - `.ifLet(optional)` - Optional-based modifier
+
+4. **BadgeModifiers.swift**
+   - `.favoriteBadge(isFavorite:)` - Heart overlay for favorited items
+   - `.rotatingGlow(_:color:cornerRadius:)` - Tonal rainbow rotating glow
+   - `.rotatingGlow(_:category:cornerRadius:)` - Category-colored rotating glow
 
 ---
 
