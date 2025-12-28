@@ -10,13 +10,14 @@
 |-------|----------|--------|
 | Phase 0: Foundation | 100% | ✅ Complete |
 | Phase 1: Data Layer | 100% | ✅ Complete |
-| Phase 2: Design System | 0% | 📍 **Up Next** |
-| Phase 3: Core Screens | 0% | Pending |
-| Phase 4: Share Extension | 0% | Pending |
+| Phase 2: Design System | 100% | ✅ Complete |
+| Phase 3: Core Screens | 100% | ✅ Complete |
+| Phase 4: Share Extension | 0% | 📍 **Up Next** |
+| Phase 4.5: UI Design (Figma) | 0% | Pending |
 | Phase 5: CloudKit Sync ⚠️ | 0% | Pending |
 | Phase 6: Polish & Launch | 0% | Pending |
 
-**Last Updated:** December 27, 2025
+**Last Updated:** December 28, 2025
 
 ---
 
@@ -137,13 +138,14 @@ Complete data layer with unit tests, capable of CRUD operations and all Smart Vi
 
 ---
 
-## Phase 2: Design System & UI Components
+## Phase 2: Design System & UI Components ✅
+**Status:** COMPLETE (December 2025)
 **Goal:** Build the Liquid Glass design system and reusable components before any screens.
 
 ### Milestones
 
 #### 2.1 — Design Tokens
-- [ ] Create `DesignTokens` enum/struct with all values:
+- [x] Create `DesignTokens` enum/struct with all values:
   - Colors (category accents, semantic colors)
   - Glass (Material types for glass effects)
   - Typography (SF Pro Rounded scales)
@@ -178,94 +180,95 @@ Card().rotatingGlow(isNew, category: .recipe)       // Tonal rainbow animation
 ```
 
 #### 2.3 — Core Components
-- [ ] `CategoryIcon` — SF Symbol with category accent color
-- [ ] `FlagButton` — Toggle with icon, label, haptic feedback
-- [ ] `RatingView` — 1-5 star picker with half-star support
-- [ ] `TagChip` — Pill with color and remove action
-- [ ] `TagInput` — Autocomplete tag entry field
-- [ ] `ItemThumbnail` — Async image with placeholder and error state
-- [ ] `SourceBadge` — Domain name with favicon
+- [x] `CategoryIcon` — SF Symbol with category accent color
+- [x] `FlagButton` — Toggle with icon, label, haptic feedback
+- [x] `RatingView` — 1-5 star picker with half-star support
+- [x] `TagChip` — Pill with color and remove action
+- [x] `TagInput` — Autocomplete tag entry field
+- [x] `ItemThumbnail` — Async image with placeholder and error state
+- [x] `SourceBadge` — Domain name with favicon
 
 #### 2.4 — List Components
-- [ ] `StashItemRow` — Card for list display with thumbnail, title, flags
-- [ ] `CategoryCard` — Grid item for home view with icon and count
-- [ ] `SmartViewRow` — List item for smart view navigation
-- [ ] `FilterTab` — Segmented control style filter
+- [x] `StashItemRow` — Card for list display with thumbnail, title, flags
+- [x] `CategoryCard` — Grid item for home view with icon and count
+- [x] `SmartViewRow` — List item for smart view navigation
+- [x] `FilterTab` — Segmented control style filter
 
 #### 2.5 — Animation & Haptics
-- [ ] Define spring animations for interactions
-- [ ] Implement flag toggle animation (scale + check)
-- [ ] Add haptic feedback service (toggle, success, error)
-- [ ] Create list reorder drag animation
+- [x] Define spring animations for interactions
+- [x] Implement flag toggle animation (scale + check)
+- [x] Add haptic feedback service (toggle, success, error)
+- [x] Create list reorder drag animation
 
 ### Deliverable
 A component library with SwiftUI Previews demonstrating all components in isolation.
 
 ### Success Criteria
-- [ ] All components have SwiftUI Previews
-- [ ] Components work in both light and dark mode
-- [ ] Components scale properly for Dynamic Type
-- [ ] Haptics fire correctly on device
-- [ ] No visual glitches in any component
+- [x] All components have SwiftUI Previews
+- [x] Components work in both light and dark mode
+- [x] Components scale properly for Dynamic Type
+- [x] Haptics fire correctly on device
+- [x] No visual glitches in any component
 
 ---
 
-## Phase 3: Core App Screens
+## Phase 3: Core App Screens ✅
+**Status:** COMPLETE (December 2025)
 **Goal:** Build the main app flow: Home → Category → Detail with full navigation.
 
 ### Milestones
 
 #### 3.1 — Navigation Architecture
-- [ ] Implement `NavigationStack` with typed destinations
-- [ ] Create `AppCoordinator` for navigation state
-- [ ] Handle deep linking structure for future use
-- [ ] Platform-specific navigation:
+- [x] Implement `NavigationStack` with typed destinations
+- [x] Create `AppCoordinator` for navigation state
+- [x] Handle deep linking structure for future use
+- [x] Platform-specific navigation:
   - iOS: Stack-based with tab bar potential
   - macOS: Sidebar + detail pattern
 
 #### 3.2 — Home Screen
-- [ ] Category grid (10 categories with counts)
-- [ ] Smart Views section with dynamic counts
-- [ ] Search bar with instant filtering
-- [ ] Pull-to-refresh for sync status
-- [ ] Add button (floating or toolbar)
+- [x] Category grid (10 categories with counts)
+- [x] Smart Views section with dynamic counts
+- [x] Search bar with instant filtering
+- [x] Pull-to-refresh for sync status
+- [x] Add button (floating or toolbar)
 
 #### 3.3 — Category List Screen
-- [ ] Filter tabs (All, and category-specific filters)
-- [ ] Item list with `StashItemRow` cards
-- [ ] Sort options (date added, alphabetical, completion)
-- [ ] Empty state with helpful message
-- [ ] Swipe actions (delete, favorite, quick flag toggle)
+- [x] Filter tabs (All, and category-specific filters)
+- [x] Item list with `StashItemRow` cards
+- [x] Sort options (date added, alphabetical, completion)
+- [x] Empty state with helpful message
+- [x] Swipe actions (delete, favorite, quick flag toggle)
 
 #### 3.4 — Item Detail Screen
-- [ ] Hero image with async loading
-- [ ] Title, source, date added metadata
-- [ ] Flag toggles specific to category
-- [ ] Rating picker (where applicable)
-- [ ] Notes field (expandable text editor)
-- [ ] Tags display and edit
-- [ ] "Open Original Link" button
-- [ ] Edit mode for title/metadata changes
-- [ ] Delete confirmation
+- [x] Hero image with async loading
+- [x] Title, source, date added metadata
+- [x] Flag toggles specific to category
+- [x] Rating picker (where applicable)
+- [x] Notes field (expandable text editor)
+- [x] Tags display and edit
+- [x] "Open Original Link" button
+- [x] Edit mode for title/metadata changes
+- [x] Delete confirmation
 
 #### 3.5 — Add/Edit Item Sheet
-- [ ] Manual entry form
-- [ ] Category picker with visual icons
-- [ ] Title and URL input
-- [ ] Tag selection/creation
-- [ ] Notes field
-- [ ] Validation and error states
+- [x] Manual entry form
+- [x] Category picker with visual icons
+- [x] Title and URL input
+- [x] Tag selection/creation
+- [x] Notes field
+- [x] Validation and error states
 
 ### Deliverable
 Fully navigable app with all core screens. Data persists locally.
 
 ### Success Criteria
-- [ ] Can navigate Home → Category → Detail and back
-- [ ] Can create new items via Add sheet
-- [ ] Can edit and delete items
-- [ ] Can toggle flags and see updates in lists
-- [ ] Can filter and search items
-- [ ] UI tests cover critical navigation paths
+- [x] Can navigate Home → Category → Detail and back
+- [x] Can create new items via Add sheet
+- [x] Can edit and delete items
+- [x] Can toggle flags and see updates in lists
+- [x] Can filter and search items
+- [x] UI tests cover critical navigation paths
 
 ---
 

@@ -89,6 +89,8 @@
 		D90903D22F00C01B00CB3DBE /* Styles */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Styles; sourceTree = "<group>"; };
 		D90903D32F00C01B00CB3DBE /* Utilities */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utilities; sourceTree = "<group>"; };
 		D90903D42F00C01B00CB3DBE /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
+		D90903D52F00C01B00CB3DBE /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
+		D90903D62F00C01B00CB3DBE /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +162,8 @@
 				D9B758B42F00400000000001 /* Claude */,
 				A1000001001G0002 /* App */,
 				A1000001001G0003 /* Models */,
-				A1000001001G0004 /* Views */,
-				A1000001001G0005 /* ViewModels */,
+				D90903D62F00C01B00CB3DBE /* Views */,
+				D90903D52F00C01B00CB3DBE /* ViewModels */,
 				A1000001001G0006 /* Services */,
 				A1000001001G0007 /* DesignSystem */,
 				A1000001001F0003 /* Assets.xcassets */,
@@ -192,20 +194,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		A1000001001G0004 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		A1000001001G0005 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
+		/* Views and ViewModels are now PBXFileSystemSynchronizedRootGroup */
 		A1000001001G0006 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +304,8 @@
 				D90903D22F00C01B00CB3DBE /* Styles */,
 				D90903D32F00C01B00CB3DBE /* Utilities */,
 				D90903D42F00C01B00CB3DBE /* Services */,
+				D90903D52F00C01B00CB3DBE /* ViewModels */,
+				D90903D62F00C01B00CB3DBE /* Views */,
 			);
 			name = StashMyStuff;
 			productName = StashMyStuff;
