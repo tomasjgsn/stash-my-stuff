@@ -19,27 +19,30 @@ jobs:
   #   steps:
   #     ...
 
-  build-macos:
-    name: Build macOS
-    runs-on: macos-15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.app
-
-      - name: Show Xcode version
-        run: xcodebuild -version
-
-      - name: Build macOS
-        run: |
-          xcodebuild build \
-            -project StashMyStuff.xcodeproj \
-            -scheme StashMyStuff \
-            -destination 'platform=macOS' \
-            -configuration Debug \
-            CODE_SIGNING_ALLOWED=NO
+  # Note: macOS build disabled until GitHub runners support macOS 26 SDK
+  # The app targets macOS 26+ which requires Xcode 16.x beta with macOS 26 SDK
+  # Current GitHub runners only have macOS SDK 15.0 which doesn't include required APIs
+  # build-macos:
+  #   name: Build macOS
+  #   runs-on: macos-15
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Select Xcode
+  #       run: sudo xcode-select -s /Applications/Xcode_16.app
+  #
+  #     - name: Show Xcode version
+  #       run: xcodebuild -version
+  #
+  #     - name: Build macOS
+  #       run: |
+  #         xcodebuild build \
+  #           -project StashMyStuff.xcodeproj \
+  #           -scheme StashMyStuff \
+  #           -destination 'platform=macOS' \
+  #           -configuration Debug \
+  #           CODE_SIGNING_ALLOWED=NO
 
   # Note: Tests disabled until GitHub runners support iOS 26 SDK
   # test:
